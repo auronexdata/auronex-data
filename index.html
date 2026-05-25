@@ -388,6 +388,55 @@ HERO
 .btn-outline:hover{
   transform:translateY(-3px);
 }
+  /* =========================================
+HORIZONTAL ENTERPRISE LINES
+========================================= */
+
+body::before{
+  content:'';
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+
+      rgba(255,255,255,0.035) 0px,
+      rgba(255,255,255,0.035) 1px,
+
+      transparent 1px,
+      transparent 120px
+    );
+
+  pointer-events:none;
+
+  z-index:-2;
+
+  opacity:.45;
+}
+
+/* SOFT CENTER GLOW */
+
+body::after{
+  content:'';
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(26,86,219,.08),
+      transparent 65%
+    );
+
+  pointer-events:none;
+
+  z-index:-1;
+}
 
 /* =========================================
 PIPELINE
