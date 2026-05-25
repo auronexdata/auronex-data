@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Studies —  AURONEX DATA</title>
-  <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,24 +24,243 @@ body::before {
 }
 
 /* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 72px;
-  display: flex; align-items: center; justify-content: space-between; padding: 0 3rem;
-  background: rgba(6,9,18,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
-}
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 15px; color: #fff; box-shadow: 0 0 20px rgba(26,86,219,0.4); }
-.nav-wordmark { font-family: var(--display); font-size: 16px; font-weight: 700; letter-spacing: 0.06em; color: var(--text); }
-.nav-wordmark span { color: var(--accent2); }
-.nav-center { display: flex; align-items: center; gap: 2.5rem; }
-.nav-center a { font-size: 13.5px; color: var(--text2); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; font-weight: 500; }
-.nav-center a:hover, .nav-center a.active { color: var(--text); }
-.nav-right { display: flex; align-items: center; gap: 12px; }
-.btn-ghost { padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text2); text-decoration: none; border: 1px solid var(--border2); transition: all 0.2s; }
-.btn-ghost:hover { color: var(--text); border-color: rgba(99,179,237,0.25); }
-.btn-nav-cta { padding: 9px 22px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #fff; text-decoration: none; background: linear-gradient(135deg, var(--accent), #1048B0); box-shadow: 0 0 24px rgba(26,86,219,0.35); transition: all 0.2s; border: none; cursor: pointer; }
-.btn-nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 32px rgba(26,86,219,0.5); }
+nav{
 
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+
+  height:88px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:0 4vw;
+
+  background:rgba(6,9,18,.82);
+
+  backdrop-filter:blur(22px);
+
+  border-bottom:1px solid rgba(255,255,255,.05);
+
+  z-index:1000;
+
+}
+/* LOGOUT BUTTON */
+
+.logout-btn{
+
+  height:48px;
+
+  padding:0 24px;
+
+  border:none;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  color:white;
+
+  font-weight:600;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1A56DB,
+      #4F8EF7
+    );
+
+  transition:.35s;
+
+}
+
+.logout-btn:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(26,86,219,.28);
+
+}
+
+/* LOGO */
+
+.nav-logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  text-decoration:none;
+
+}
+
+.logo-mark{
+
+  width:52px;
+  height:52px;
+
+  border-radius:16px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1A56DB,
+      #0EC4F1
+    );
+
+  color:white;
+
+  font-family:'Syne',sans-serif;
+
+  font-size:1.25rem;
+
+  font-weight:800;
+
+}
+
+.nav-wordmark{
+
+  font-family:'Syne',sans-serif;
+
+  font-size:1.9rem;
+
+  font-weight:700;
+
+  color:white;
+
+}
+
+.nav-wordmark span{
+
+  color:#4F8EF7;
+
+}
+
+/* CENTER NAV */
+
+.nav-center{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:2.6rem;
+
+}
+
+.nav-center a{
+
+  color:#8BA6CC;
+
+  text-decoration:none;
+
+  font-weight:500;
+
+  font-size:1rem;
+
+  transition:.3s;
+
+}
+
+.nav-center a:hover{
+
+  color:white;
+
+}
+.dashboard{
+
+  width:min(1400px,92%);
+
+  margin:auto;
+
+  padding-top:140px;
+
+  padding-bottom:80px;
+
+}
+
+
+/* RIGHT BUTTONS */
+
+.nav-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+}
+
+/* BUTTON */
+
+.btn-nav-cta{
+
+  height:48px;
+
+  padding:0 26px;
+
+  border-radius:14px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-decoration:none;
+
+  color:white;
+
+  font-weight:600;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1A56DB,
+      #4F8EF7
+    );
+
+  transition:.35s;
+
+}
+
+.btn-nav-cta:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(26,86,219,.28);
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .nav-center{
+
+    display:none;
+
+  }
+
+}
 /* PAGE HERO */
 .page-hero {
   padding: 140px 3rem 6rem; position: relative; z-index: 1;
@@ -221,8 +439,12 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3r
     <a href="index.html#about">About</a>
   </div>
   <div class="nav-right">
-    <a href="auth.html" class="btn-ghost">Sign In</a>
     <a href="auth.html#signup" class="btn-nav-cta">Get Started →</a>
+
+  <button class="logout-btn" onclick="logoutUser()">
+    Logout
+  </button>
+
   </div>
 </nav>
 
@@ -588,6 +810,10 @@ if(location.hash) {
     const el = document.querySelector(location.hash);
     if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 200);
+}
+function logoutUser() {
+  localStorage.removeItem("auronexLoggedIn");
+  window.location.href = "auth.html";
 }
 </script>
 </body>
