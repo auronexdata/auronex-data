@@ -34,23 +34,199 @@ body::before {
 @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
 
 /* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 68px;
-  display: flex; align-items: center; justify-content: space-between; padding: 0 3rem;
-  background: rgba(6,9,18,0.88); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
-}
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--accent), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 14px; color: #fff; box-shadow: 0 0 18px rgba(26,86,219,0.4); }
-.nav-wordmark { font-family: var(--display); font-size: 15px; font-weight: 700; letter-spacing: 0.06em; color: var(--text); }
-.nav-wordmark span { color: var(--accent2); }
-.back-link { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.2s; }
-.back-link:hover { color: var(--text); }
-.back-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+nav{
 
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+
+  height:88px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:0 4vw;
+
+  background:rgba(6,9,18,.82);
+
+  backdrop-filter:blur(22px);
+
+  border-bottom:1px solid rgba(255,255,255,.05);
+
+  z-index:1000;
+
+}
+
+/* LOGO */
+
+.nav-logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  text-decoration:none;
+
+}
+
+.logo-mark{
+
+  width:52px;
+  height:52px;
+
+  border-radius:16px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1A56DB,
+      #0EC4F1
+    );
+
+  color:white;
+
+  font-family:'Syne',sans-serif;
+
+  font-size:1.25rem;
+
+  font-weight:800;
+
+}
+
+.nav-wordmark{
+
+  font-family:'Syne',sans-serif;
+
+  font-size:1.9rem;
+
+  font-weight:700;
+
+  color:white;
+
+}
+
+.nav-wordmark span{
+
+  color:#4F8EF7;
+
+}
+
+/* CENTER NAV */
+
+.nav-center{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:2.6rem;
+
+}
+
+.nav-center a{
+
+  color:#8BA6CC;
+
+  text-decoration:none;
+
+  font-weight:500;
+
+  font-size:1rem;
+
+  transition:.3s;
+
+}
+
+.nav-center a:hover{
+
+  color:white;
+
+}
+
+/* RIGHT BUTTONS */
+
+.nav-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+}
+
+/* BUTTON */
+
+.btn-nav-cta{
+
+  height:48px;
+
+  padding:0 26px;
+
+  border-radius:14px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-decoration:none;
+
+  color:white;
+
+  font-weight:600;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1A56DB,
+      #4F8EF7
+    );
+
+  transition:.35s;
+
+}
+
+.btn-nav-cta:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(26,86,219,.28);
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .nav-center{
+
+    display:none;
+
+  }
+
+}
 /* MAIN LAYOUT */
 main {
   flex: 1; display: grid; grid-template-columns: 1fr 1fr;
-  padding-top: 68px; position: relative; z-index: 1;
+  padding-top: 140px; position: relative; z-index: 1;
 }
 
 /* LEFT PANEL */
@@ -59,7 +235,7 @@ main {
   border-right: 1px solid var(--border);
   padding: 5rem 4rem;
   display: flex; flex-direction: column; justify-content: center;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 140px);
 }
 
 .left-tag { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; }
@@ -98,7 +274,7 @@ main {
 /* RIGHT PANEL */
 .auth-right {
   display: flex; align-items: center; justify-content: center;
-  padding: 4rem 4rem; min-height: calc(100vh - 68px);
+  padding: 4rem 4rem; min-height: calc(100vh - 140px);
 }
 
 .auth-box {
@@ -261,10 +437,6 @@ main {
     <div class="logo-mark">AX</div>
     <span class="nav-wordmark">AURONEX<span>DATA</span></span>
   </a>
-  <a href="index.html" class="back-link">
-    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    Back to Homepage
-  </a>
 </nav>
 
 <main>
@@ -329,18 +501,9 @@ main {
 
       <!-- SIGN IN PANEL -->
       <div class="form-panel active" id="signinPanel">
-        <div class="auth-title">Welcome back</div>
-        <div class="auth-sub">Sign in to your  AURONEX DATA client portal</div>
-
-        <div class="msg error" id="siError">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-          <span id="siErrorMsg">Invalid email or password. Please try again.</span>
-        </div>
-        <div class="msg success" id="siSuccess">
-          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-          Signed in successfully! Redirecting...
-        </div>
-
+        <div class="auth-title">Welcome to Auronex</div>
+        <div class="auth-sub">Sign in to your  AURONEX DATA account</div>
+        
         <div class="form-group">
           <label class="form-label">Work Email</label>
           <div class="input-icon-wrap">
@@ -384,11 +547,6 @@ main {
         <div id="signupFormContent">
           <div class="auth-title">Create Account</div>
           <div class="auth-sub">Start your data transformation journey today</div>
-
-          <div class="msg error" id="suError">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-            <span id="suErrorMsg">Please fill all required fields correctly.</span>
-          </div>
 
           <div class="form-row">
             <div class="form-group">
@@ -469,7 +627,7 @@ main {
 <!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Replace with your public key
+emailjs.init("jOVfnMmLggxdluUlS"); // Replace with your public key
 
 // Switch between sign in / sign up
 function switchTab(tab) {
@@ -535,7 +693,7 @@ async function handleSignIn() {
 
   // Send notification email
   try {
-    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    await emailjs.send("service_4aar93d", "template_kmnyll5", {
       subject: " AURONEX DATA — New Sign In",
       from_name: "Portal System",
       message: `Sign-in attempt: ${email}`,
@@ -545,6 +703,7 @@ async function handleSignIn() {
 
   setTimeout(() => {
     showMsg('siSuccess', true);
+    localStorage.setItem("auronexLoggedIn", "true");
     setTimeout(() => { window.location.href = 'index.html'; }, 1500);
   }, 1000);
 }
@@ -577,7 +736,7 @@ async function handleSignUp() {
 
   // Send new user notification to owner email
   try {
-    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    await emailjs.send("service_4aar93d", "template_kmnyll5", {
       subject: " AURONEX DATA — New Account Sign-Up",
       from_name: `${first} ${last}`,
       from_email: email,
@@ -596,6 +755,74 @@ async function handleSignUp() {
 // Social auth placeholder
 function socialAuth(provider) {
   alert(`${provider} authentication would be connected here via OAuth 2.0.`);
+}
+
+const authBtn = document.getElementById("authBtn");
+
+const isLoggedIn =
+  localStorage.getItem("auronexLoggedIn");
+
+if(isLoggedIn === "true"){
+
+  authBtn.innerHTML = "Dashboard";
+
+  authBtn.href = "dashboard.html";
+
+}
+
+function loginUser(event){
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById("loginEmail").value;
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  /* VALIDATION */
+
+  if(email.trim() === "" || password.trim() === ""){
+
+    showError(
+      "Please enter email and password."
+    );
+
+    return;
+  }
+
+  /* DEMO LOGIN */
+
+  if(
+    email === "admin@auronex.com"
+    &&
+    password === "admin123"
+  ){
+
+    showSuccess(
+      "Signed in successfully! Redirecting..."
+    );
+
+    localStorage.setItem(
+      "auronexLoggedIn",
+      "true"
+    );
+
+    setTimeout(() => {
+
+      window.location.href =
+        "index.html";
+
+    }, 1200);
+
+  }else{
+
+    showError(
+      "Invalid email or password. Please try again."
+    );
+
+  }
+
 }
 </script>
 </body>
