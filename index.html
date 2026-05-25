@@ -1,0 +1,3204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURONEX DATA — Enterprise Data Platforms</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================
+BASE RESET
+========================================= */
+
+*,
+*::before,
+*::after{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#060912;
+  color:#EEF4FF;
+  font-family:'Outfit',sans-serif;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* =========================================
+ROOT VARIABLES
+========================================= */
+
+:root{
+
+  --bg:#060912;
+  --bg2:#0B1120;
+  --panel:#0D1526;
+
+  --text:#EEF4FF;
+  --text2:#B7C4D8;
+  --text3:#7C8CA5;
+
+  --accent:#1A56DB;
+  --accent2:#4F8EF7;
+  --cyan:#0EC4F1;
+
+  --success:#10D98A;
+
+  --border:rgba(255,255,255,0.06);
+
+  --glass:rgba(255,255,255,0.02);
+
+  --radius:20px;
+
+  --smooth:
+    all 0.25s cubic-bezier(.16,1,.3,1);
+
+  --shadow:
+    0 10px 40px rgba(0,0,0,0.45);
+
+  --glow:
+    0 0 80px rgba(26,86,219,0.12);
+
+  --mono:'DM Mono',monospace;
+}
+
+/* =========================================
+GLOBAL
+========================================= */
+
+.container{
+  width:min(1280px,92%);
+  margin:auto;
+}
+
+section{
+  position:relative;
+  padding:100px 0;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+img{
+  max-width:100%;
+}
+
+.gradient-text{
+  background:
+    linear-gradient(
+      90deg,
+      #EEF4FF,
+      #4F8EF7,
+      #0EC4F1
+    );
+
+    background-clip: text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-tag{
+  font-family:var(--mono);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--accent2);
+  margin-bottom:18px;
+}
+
+.section-h2{
+  font-size:clamp(2rem,4vw,3.8rem);
+  line-height:1.05;
+  font-family:'Syne',sans-serif;
+  margin-bottom:20px;
+}
+
+.section-sub{
+  max-width:760px;
+  color:var(--text2);
+  font-size:1.05rem;
+}
+
+.accent-bar{
+  width:90px;
+  height:4px;
+  border-radius:100px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent),
+      var(--cyan)
+    );
+
+  margin:26px 0;
+}
+
+/* =========================================
+NAVBAR
+========================================= */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+
+  height:82px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 4vw;
+
+  z-index:1000;
+
+  background:rgba(6,9,18,.78);
+
+  backdrop-filter:blur(24px);
+
+  border-bottom:1px solid rgba(255,255,255,.04);
+
+  transition:var(--smooth);
+}
+
+.nav-logo{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo-mark{
+  width:42px;
+  height:42px;
+
+  border-radius:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--cyan)
+    );
+
+  color:white;
+  font-weight:700;
+  font-family:'Syne',sans-serif;
+}
+
+.nav-wordmark{
+  font-family:'Syne',sans-serif;
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+
+.nav-wordmark span{
+  color:var(--accent2);
+}
+
+.nav-center{
+  display:flex;
+  gap:2rem;
+}
+
+.nav-center a{
+  color:var(--text2);
+  font-size:.95rem;
+  transition:var(--smooth);
+}
+
+.nav-center a:hover{
+  color:white;
+}
+
+.nav-right{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
+
+.btn-ghost{
+  color:var(--text2);
+}
+
+.btn-nav-cta{
+  padding:12px 18px;
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+
+  color:white;
+  font-weight:600;
+
+  transition:var(--smooth);
+}
+
+.btn-nav-cta:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================================
+HERO
+========================================= */
+
+#hero{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+
+  padding-top:120px;
+
+  overflow:hidden;
+}
+
+.hero-inner{
+  width:min(1380px,92%);
+  margin:auto;
+
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+
+  gap:5rem;
+  align-items:center;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:10px 16px;
+
+  border-radius:100px;
+
+  background:rgba(14,196,241,.08);
+
+  border:1px solid rgba(14,196,241,.16);
+
+  font-size:12px;
+
+  margin-bottom:28px;
+}
+
+.badge-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--cyan);
+}
+
+.hero-h1{
+  font-size:clamp(3rem,6vw,5.5rem);
+  line-height:.95;
+  font-family:'Syne',sans-serif;
+  margin-bottom:28px;
+}
+
+.hero-sub{
+  max-width:640px;
+  font-size:1.08rem;
+  color:var(--text2);
+}
+
+.status-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  margin-top:22px;
+
+  padding:8px 14px;
+
+  border-radius:100px;
+
+  background:rgba(16,217,138,.08);
+
+  border:1px solid rgba(16,217,138,.18);
+
+  font-size:12px;
+  color:#7CFFBE;
+}
+
+.status-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#10D98A;
+}
+
+.hero-btns{
+  display:flex;
+  gap:1rem;
+
+  margin-top:2.4rem;
+}
+
+.btn-primary,
+.btn-outline{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:16px 22px;
+
+  border-radius:16px;
+
+  font-weight:600;
+
+  transition:var(--smooth);
+}
+
+.btn-primary{
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+
+  color:white;
+}
+
+.btn-outline{
+  border:1px solid rgba(255,255,255,.08);
+  color:white;
+}
+
+.btn-primary:hover,
+.btn-outline:hover{
+  transform:translateY(-3px);
+}
+
+/* =========================================
+PIPELINE
+========================================= */
+
+.pipeline-flow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin-top:2rem;
+}
+
+.pipe-stage{
+  flex:1;
+
+  text-align:center;
+
+  padding:12px;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.06);
+
+  font-family:var(--mono);
+
+  font-size:11px;
+
+  color:var(--text2);
+}
+
+.pipe-arrow{
+  color:var(--text3);
+}
+
+/* =========================================
+METRICS
+========================================= */
+
+.hero-metrics{
+  display:flex;
+  gap:3rem;
+
+  margin-top:3rem;
+}
+
+.h-metric-val{
+  font-size:2.2rem;
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+}
+
+.h-metric-val span{
+  color:var(--accent2);
+}
+
+.h-metric-label{
+  color:var(--text3);
+  font-size:.92rem;
+}
+
+/* =========================================
+DASHBOARD CARD
+========================================= */
+
+.dashboard-card{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  box-shadow:
+    var(--shadow),
+    var(--glow);
+}
+
+.card-topbar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:18px 22px;
+
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+}
+
+.dr{background:#FF5F57;}
+.dy{background:#FEBC2E;}
+.dg{background:#28C840;}
+
+.topbar-title{
+  margin-left:10px;
+  color:var(--text2);
+  font-size:.82rem;
+}
+
+.card-body{
+  padding:24px;
+}
+
+.metrics-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+
+.metric-chip{
+  padding:18px;
+  border-radius:18px;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.mc-label{
+  color:var(--text3);
+  font-size:.8rem;
+}
+
+.mc-value{
+  margin-top:8px;
+  font-size:1.8rem;
+  font-weight:700;
+}
+
+.mc-delta{
+  margin-top:8px;
+  color:#7CFFBE;
+  font-size:.8rem;
+}
+
+/* =========================================
+TRUST
+========================================= */
+
+#trust{
+  padding:80px 0;
+}
+
+.trust-inner{
+  width:min(1280px,92%);
+  margin:auto;
+}
+
+.trust-label{
+  margin-bottom:24px;
+
+  text-align:center;
+
+  font-size:.9rem;
+  color:var(--text3);
+}
+
+.trust-logos{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:1rem;
+}
+
+.tech-pill{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.02);
+
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.tech-ico{
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* =========================================
+SERVICES
+========================================= */
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+
+  margin-top:4rem;
+}
+
+.svc-card{
+  padding:34px;
+
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+
+  transition:var(--smooth);
+}
+
+.svc-card:hover{
+  transform:translateY(-6px);
+}
+/* =========================================
+CASE STUDIES
+========================================= */
+
+.cases-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+
+  margin-top:4rem;
+}
+
+.case-card{
+  display:block;
+
+  padding:34px;
+
+  border-radius:26px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+
+  transition:var(--smooth);
+
+  position:relative;
+  overflow:hidden;
+}
+
+.case-card::before{
+  content:'';
+
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(79,142,247,.14),
+      transparent 45%
+    );
+
+  opacity:0;
+
+  transition:var(--smooth);
+}
+
+.case-card:hover::before{
+  opacity:1;
+}
+
+.case-card:hover{
+  transform:translateY(-6px);
+
+  border-color:rgba(79,142,247,.16);
+}
+
+.case-industry{
+  display:inline-flex;
+
+  padding:8px 14px;
+
+  border-radius:100px;
+
+  background:rgba(79,142,247,.1);
+
+  color:var(--accent2);
+
+  font-size:11px;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  margin-bottom:22px;
+}
+
+.case-title{
+  font-size:1.5rem;
+
+  line-height:1.3;
+
+  margin-bottom:16px;
+
+  font-weight:600;
+}
+
+.case-desc{
+  color:var(--text2);
+
+  line-height:1.8;
+}
+
+.case-results{
+  display:flex;
+  gap:2rem;
+
+  margin-top:2rem;
+}
+
+.cr-val{
+  font-size:1.8rem;
+  font-weight:700;
+}
+
+.cr-val span{
+  color:var(--accent2);
+}
+
+.cr-lbl{
+  color:var(--text3);
+  font-size:.85rem;
+}
+
+.case-arrow{
+  margin-top:2rem;
+
+  color:var(--accent2);
+
+  font-weight:600;
+}
+
+@media(max-width:1100px){
+
+  .cases-grid{
+    grid-template-columns:1fr;
+  }
+}
+/* =========================================
+PROCESS
+========================================= */
+
+.process-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.5rem;
+  margin-top:4rem;
+}
+
+.process-card{
+  padding:34px;
+  border-radius:24px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.process-num{
+  font-size:3rem;
+  font-weight:700;
+  font-family:'Syne',sans-serif;
+  color:rgba(79,142,247,.18);
+  margin-bottom:1rem;
+}
+
+.process-title{
+  font-size:1.2rem;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+.process-desc{
+  color:var(--text2);
+  line-height:1.8;
+}
+
+/* =========================================
+INDUSTRIES
+========================================= */
+
+.industries-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.5rem;
+  margin-top:4rem;
+}
+
+.industry-card{
+  padding:30px;
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+
+  transition:var(--smooth);
+}
+
+.industry-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(79,142,247,.16);
+}
+
+.industry-title{
+  font-size:1.25rem;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+.industry-desc{
+  color:var(--text2);
+  line-height:1.8;
+}
+
+
+
+/* SERVICE HOVER */
+
+.svc-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.svc-card::before{
+  content:'';
+
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(79,142,247,.12),
+      transparent 45%
+    );
+
+  opacity:0;
+
+  transition:var(--smooth);
+}
+
+.svc-card:hover::before{
+  opacity:1;
+}
+
+.svc-card:hover{
+  border-color:rgba(79,142,247,.18);
+
+  box-shadow:
+    0 18px 60px rgba(0,0,0,.45),
+    0 0 80px rgba(26,86,219,.12);
+}
+
+.svc-num{
+  color:var(--text3);
+  font-size:.75rem;
+  letter-spacing:.08em;
+}
+
+.svc-ico{
+  width:58px;
+  height:58px;
+
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(26,86,219,.12);
+
+  margin:22px 0;
+}
+
+.svc-ico svg{
+  width:24px;
+  height:24px;
+
+  stroke:white;
+  fill:none;
+
+  stroke-width:1.8;
+}
+
+.svc-title{
+  font-size:1.35rem;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+.svc-desc{
+  color:var(--text2);
+}
+
+.enterprise-outcome{
+  margin-top:1.2rem;
+
+  padding-top:1rem;
+
+  border-top:1px solid rgba(255,255,255,.05);
+
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+
+  color:var(--accent2);
+}
+
+.svc-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+
+  margin-top:1.5rem;
+}
+
+.tag{
+  padding:8px 12px;
+
+  border-radius:100px;
+
+  background:rgba(255,255,255,.04);
+
+  font-size:.75rem;
+}
+
+/* =========================================
+CONTACT
+========================================= */
+
+.contact-inner{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+}
+
+.contact-title{
+  font-size:3rem;
+  line-height:1.05;
+  margin-bottom:22px;
+  font-family:'Syne',sans-serif;
+}
+
+.contact-desc{
+  color:var(--text2);
+  margin-bottom:2rem;
+}
+
+.contact-form{
+  padding:34px;
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+.form-group{
+  margin-bottom:1rem;
+}
+
+.form-label{
+  display:block;
+  margin-bottom:8px;
+  font-size:.92rem;
+}
+
+.form-input{
+  width:100%;
+
+  padding:16px;
+
+  border-radius:14px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  background:rgba(255,255,255,.03);
+
+  color:white;
+
+  outline:none;
+}
+
+textarea.form-input{
+  min-height:140px;
+  resize:vertical;
+}
+
+.form-submit{
+  width:100%;
+
+  margin-top:1rem;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+
+  color:white;
+
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.perk-ico svg{
+  width:22px;
+  height:22px;
+
+  stroke:#EEF4FF;
+  fill:none;
+
+  stroke-width:1.8;
+}
+
+.svc-ico svg{
+  width:24px;
+  height:24px;
+
+  stroke:white;
+  fill:none;
+
+  stroke-width:1.8;
+}
+
+.process-card,
+.industry-card{
+  min-height:260px;
+}
+.contact-inner{
+  gap:4rem;
+  align-items:start;
+}
+
+.contact-perks{
+  display:flex;
+  flex-direction:column;
+  gap:1.4rem;
+
+  margin-top:2rem;
+}
+
+.perk{
+  display:flex;
+  align-items:flex-start;
+  gap:1rem;
+}
+
+.perk-ico{
+  width:52px;
+  height:52px;
+
+  border-radius:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.06);
+
+  flex-shrink:0;
+}
+
+.perk-title{
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+.perk-sub{
+  color:var(--text2);
+}
+.contact-trust{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+
+  margin-top:2.5rem;
+}
+
+.contact-trust-item{
+  padding:20px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.02);
+
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.contact-trust-title{
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.contact-trust-sub{
+  color:var(--text3);
+  font-size:.92rem;
+}
+
+.form-success{
+  display:none;
+}
+
+.check-ico{
+  margin-bottom:1rem;
+}
+
+.form-success h3{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.form-success p{
+  color:var(--text2);
+}
+
+.form-note{
+  margin-top:1rem;
+
+  color:var(--text3);
+
+  font-size:.88rem;
+}
+
+.form-success{
+  display:none;
+}
+
+.check-ico{
+  margin-bottom:1rem;
+}
+
+.form-success h3{
+  font-size:1.6rem;
+  margin-bottom:10px;
+}
+
+.form-success p{
+  color:var(--text2);
+}
+
+.form-note{
+  margin-top:1rem;
+
+  color:var(--text3);
+
+  font-size:.88rem;
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+footer{
+  padding:50px 0;
+
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+.footer-inner{
+  width:min(1280px,92%);
+  margin:auto;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.footer-brand{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+}
+
+.footer-copy{
+  color:var(--text3);
+  font-size:.9rem;
+}
+
+.footer-links{
+  display:flex;
+  gap:1rem;
+}
+
+.footer-link svg{
+  width:20px;
+  height:20px;
+
+  stroke:var(--text2);
+  fill:none;
+}
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media(max-width:1100px){
+
+  .hero-inner,
+  .contact-inner,
+  .about-inner{
+    grid-template-columns:1fr;
+  }
+
+  .services-grid,
+  .cases-grid,
+  .process-grid,
+  .industries-grid{
+    grid-template-columns:1fr;
+  }
+
+  .trust-logos{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .nav-center{
+    display:none;
+  }
+
+  .hero-btns,
+  .hero-metrics,
+  .pipeline-flow{
+    flex-direction:column;
+  }
+
+  .metrics-row,
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    gap:1rem;
+    text-align:center;
+  }
+
+}
+ /* =========================================
+ABOUT
+========================================= */
+
+.about-inner{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:4rem;
+  align-items:start;
+}
+
+.about-statement{
+  font-size:1.08rem;
+  line-height:1.9;
+  color:var(--text2);
+}
+
+.about-statement strong{
+  color:white;
+}
+
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+}
+
+.a-stat{
+  padding:28px;
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+}
+/* =========================================
+SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#060912;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#1A56DB;
+  border-radius:100px;
+}
+
+/* =========================================
+ANIMATION
+========================================= */
+
+.fade-up{
+  opacity:0;
+  transform:translateY(40px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.fade-up.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.d1{
+  transition-delay:.1s;
+}
+
+.d2{
+  transition-delay:.2s;
+}
+/* =========================================
+ABOUT
+========================================= */
+
+.about-inner{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:4rem;
+  align-items:start;
+}
+
+.about-statement{
+  font-size:1.08rem;
+  line-height:1.9;
+  color:var(--text2);
+}
+
+.about-statement strong{
+  color:white;
+}
+
+.about-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+}
+
+.a-stat{
+  padding:28px;
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.015)
+    );
+
+  border:1px solid rgba(255,255,255,.06);
+}
+
+/* =========================================
+PREMIUM MICRO INTERACTIONS
+========================================= */
+
+button,
+a,
+.svc-card,
+.case-card,
+.process-card,
+.industry-card{
+  transition:
+    transform .35s cubic-bezier(.16,1,.3,1),
+    box-shadow .35s cubic-bezier(.16,1,.3,1),
+    border-color .35s cubic-bezier(.16,1,.3,1);
+}
+
+/* SECTION GLOW */
+
+section::before{
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(79,142,247,.03),
+      transparent 60%
+    );
+
+  pointer-events:none;
+}
+
+/* BUTTON GLOW */
+
+.btn-primary,
+.btn-nav-cta{
+  position:relative;
+  overflow:hidden;
+}
+
+.btn-primary::before,
+.btn-nav-cta::before{
+  content:'';
+
+  position:absolute;
+
+  top:0;
+  left:-120%;
+
+  width:100%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.18),
+      transparent
+    );
+
+  transition:1s;
+}
+
+.btn-primary:hover::before,
+.btn-nav-cta:hover::before{
+  left:120%;
+}
+
+/* DASHBOARD FLOAT */
+
+.dashboard-card{
+  animation:floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+/* BAR ANIMATION */
+
+.bar{
+  animation:barGrow 1.2s ease forwards;
+  transform-origin:bottom;
+}
+
+@keyframes barGrow{
+
+  from{
+    transform:scaleY(0);
+  }
+
+  to{
+    transform:scaleY(1);
+  }
+
+}
+
+/* CARD DEPTH */
+
+.svc-card:hover,
+.case-card:hover,
+.process-card:hover,
+.industry-card:hover,
+.a-stat:hover{
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45),
+    0 0 80px rgba(79,142,247,.10);
+
+}
+
+/* ICON GLOW */
+
+.svc-ico,
+.tech-ico,
+.perk-ico{
+  position:relative;
+}
+
+.svc-ico::after,
+.tech-ico::after,
+.perk-ico::after{
+  content:'';
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:inherit;
+
+  background:rgba(79,142,247,.16);
+
+  filter:blur(18px);
+
+  opacity:0;
+
+  transition:var(--smooth);
+
+  z-index:-1;
+}
+
+.svc-card:hover .svc-ico::after,
+.tech-pill:hover .tech-ico::after,
+.perk:hover .perk-ico::after{
+  opacity:1;
+}
+
+/* TECH PILLS */
+
+.tech-pill:hover{
+  transform:translateY(-5px);
+
+  border-color:rgba(79,142,247,.16);
+}
+
+/* METRIC HOVER */
+
+.metric-chip:hover{
+  transform:translateY(-4px);
+
+  border-color:rgba(79,142,247,.16);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(79,142,247,.08),
+      rgba(255,255,255,.02)
+    );
+}
+
+/* NAV LINK ANIMATION */
+
+.nav-center a{
+  position:relative;
+}
+
+.nav-center a::after{
+  content:'';
+
+  position:absolute;
+
+  left:0;
+  bottom:-8px;
+
+  width:0%;
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent2),
+      var(--cyan)
+    );
+
+  transition:var(--smooth);
+}
+
+.nav-center a:hover::after{
+  width:100%;
+}
+
+/* FORM IMPROVEMENTS */
+
+.form-input:focus{
+  border-color:rgba(79,142,247,.3);
+
+  box-shadow:
+    0 0 0 4px rgba(79,142,247,.08);
+}
+
+/* SCROLL REVEAL */
+
+.fade-up{
+  opacity:0;
+  transform:translateY(50px);
+}
+
+.fade-up.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* HERO ORBS */
+
+.hero-orb{
+  position:absolute;
+
+  width:420px;
+  height:420px;
+
+  border-radius:50%;
+
+  filter:blur(120px);
+
+  opacity:.12;
+
+  z-index:-1;
+}
+
+.orb1{
+  background:#1A56DB;
+
+  top:-120px;
+  left:-120px;
+}
+
+.orb2{
+  background:#0EC4F1;
+
+  bottom:-140px;
+  right:-120px;
+}
+
+/* PREMIUM BORDERS */
+
+.dashboard-card,
+.svc-card,
+.case-card,
+.process-card,
+.industry-card,
+.contact-form,
+.a-stat{
+  backdrop-filter:blur(16px);
+}
+
+/* TEXT SHARPENING */
+
+.hero-h1,
+.section-h2,
+.case-title,
+.svc-title,
+.process-title,
+.industry-title{
+  letter-spacing:-0.03em;
+}
+
+/* PREMIUM SELECTION */
+
+::selection{
+  background:#1A56DB;
+  color:white;
+}
+
+@media(max-width:768px){
+
+  section{
+    padding:80px 0;
+  }
+
+  .hero-h1{
+    font-size:3rem;
+  }
+
+  .section-h2{
+    font-size:2.4rem;
+  }
+
+  .container,
+  .hero-inner{
+    width:92%;
+  }
+
+}
+.chart-row{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:1.2rem;
+
+  margin-top:1.5rem;
+}
+
+.chart-box{
+  padding:22px;
+
+  border-radius:22px;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.chart-lbl{
+  color:var(--text3);
+
+  font-size:.82rem;
+
+  margin-bottom:1rem;
+}
+
+.bars{
+  height:180px;
+
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.bar{
+  flex:1;
+
+  border-radius:12px 12px 4px 4px;
+}
+.a-val{
+  font-size:2.4rem;
+
+  font-family:'Syne',sans-serif;
+
+  font-weight:700;
+
+  margin-bottom:10px;
+}
+
+.a-val span{
+  color:var(--accent2);
+}
+
+.a-lbl{
+  color:var(--text2);
+
+  line-height:1.7;
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="bg-glow glow1"></div>
+<div class="bg-glow glow2"></div>
+<!-- NAV -->
+
+<nav id="mainNav">
+
+  <a href="index.html" class="nav-logo">
+
+    <div class="logo-mark">
+      AX
+    </div>
+
+    <span class="nav-wordmark">
+      AURONEX <span>DATA</span>
+    </span>
+
+  </a>
+
+  <div class="nav-center">
+
+    <a href="#services">Services</a>
+
+    <a href="case-studies.html">
+      Case Studies
+    </a>
+
+    <a href="#process">Process</a>
+
+    <a href="#industries">Industries</a>
+
+    <a href="#about">About</a>
+
+  </div>
+
+  <div class="nav-right">
+
+    <a href="auth.html" class="btn-ghost">
+      Sign In
+    </a>
+
+    <a href="#contact" class="btn-nav-cta">
+      Schedule Call →
+    </a>
+
+  </div>
+
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+
+  <div class="hero-inner">
+
+    <div class="hero-left fade-up">
+
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        Enterprise Data Engineering
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="line">Enterprise Data Platforms</span>
+        <span class="line gradient-text">Built for Modern Scale.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Cloud-native data engineering, analytics automation, and reporting infrastructure for modern organizations.
+      </p>
+
+      <div class="status-chip">
+        <div class="status-dot"></div>
+        Founded by Sripada Arun • Azure & Modern Data Stack Consulting
+      </div>
+
+      <div class="hero-btns">
+
+        <a href="#contact" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+          </svg>
+          Schedule Strategy Call
+        </a>
+
+        <a href="case-studies.html" class="btn-outline">
+          View Case Studies
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <div class="pipeline-flow">
+
+        <div class="pipe-stage">Azure</div>
+
+        <div class="pipe-arrow">→</div>
+
+        <div class="pipe-stage">Databricks</div>
+
+        <div class="pipe-arrow">→</div>
+
+        <div class="pipe-stage">Snowflake</div>
+
+        <div class="pipe-arrow">→</div>
+
+        <div class="pipe-stage">Power BI</div>
+
+      </div>
+
+      <div class="hero-metrics">
+
+        <div class="h-metric">
+          <div class="h-metric-val">40<span>+</span></div>
+          <div class="h-metric-label">Automated Pipelines</div>
+        </div>
+
+        <div class="h-metric">
+          <div class="h-metric-val">15<span>+</span></div>
+          <div class="h-metric-label">Analytics Deployments</div>
+        </div>
+
+        <div class="h-metric">
+          <div class="h-metric-val">99.9<span>%</span></div>
+          <div class="h-metric-label">Reporting Reliability</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="hero-visual fade-up d2">
+
+      <div class="dashboard-card">
+
+        <div class="card-topbar">
+          <div class="dot dr"></div>
+          <div class="dot dy"></div>
+          <div class="dot dg"></div>
+
+          <span class="topbar-title">
+            AURONEX ANALYTICS — Enterprise Operations · Live
+          </span>
+        </div>
+
+        <div class="card-body">
+
+          <div class="metrics-row">
+
+            <div class="metric-chip">
+              <div class="mc-label">Revenue MTD</div>
+              <div class="mc-value">$4.2M</div>
+              <div class="mc-delta">↑ 18.4%</div>
+            </div>
+
+            <div class="metric-chip">
+              <div class="mc-label">Pipeline Health</div>
+              <div class="mc-value">99.9%</div>
+              <div class="mc-delta">Stable</div>
+            </div>
+
+            <div class="metric-chip">
+              <div class="mc-label">Analytics Jobs</div>
+              <div class="mc-value">214</div>
+              <div class="mc-delta">Running</div>
+            </div>
+
+          </div>
+
+          <div class="chart-row">
+
+            <div class="chart-box">
+
+              <div class="chart-lbl">
+                Enterprise Analytics Throughput
+              </div>
+
+              <div class="bars">
+
+                <div class="bar" style="height:38%;background:rgba(26,86,219,0.28)"></div>
+                <div class="bar" style="height:50%;background:rgba(26,86,219,0.32)"></div>
+                <div class="bar" style="height:44%;background:rgba(26,86,219,0.3)"></div>
+                <div class="bar" style="height:62%;background:rgba(26,86,219,0.38)"></div>
+                <div class="bar" style="height:68%;background:rgba(26,86,219,0.42)"></div>
+                <div class="bar" style="height:58%;background:rgba(26,86,219,0.38)"></div>
+                <div class="bar" style="height:76%;background:rgba(26,86,219,0.5)"></div>
+                <div class="bar" style="height:80%;background:rgba(26,86,219,0.55)"></div>
+                <div class="bar" style="height:88%;background:rgba(79,142,247,0.6)"></div>
+                <div class="bar" style="height:92%;background:rgba(79,142,247,0.7)"></div>
+                <div class="bar" style="height:96%;background:rgba(122,179,255,0.8)"></div>
+                <div class="bar" style="height:100%;background:#4F8EF7"></div>
+
+              </div>
+
+            </div>
+
+            <div class="chart-box">
+
+              <div class="chart-lbl">
+                Cloud Infrastructure Mix
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:center;height:56px">
+
+                <svg viewBox="0 0 80 80" width="80" height="80">
+
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#0D1526" stroke-width="14"/>
+
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#1A56DB" stroke-width="14"
+                    stroke-dasharray="106 70"
+                    stroke-dashoffset="0"
+                    transform="rotate(-90 40 40)"/>
+
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#0EC4F1" stroke-width="14"
+                    stroke-dasharray="52 124"
+                    stroke-dashoffset="-106"
+                    transform="rotate(-90 40 40)"/>
+
+                  <text x="40" y="44" text-anchor="middle"
+                    fill="#EEF4FF"
+                    font-size="10"
+                    font-family="DM Mono"
+                    font-weight="500">60%</text>
+
+                </svg>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- TRUST -->
+<!-- TRUST -->
+<section id="trust">
+
+  <div class="trust-inner">
+
+    <div class="trust-label">
+      Modern Enterprise Data Ecosystem
+    </div>
+
+    <div class="trust-logos">
+
+      <div class="tech-pill">
+        <div class="tech-ico" style="background:rgba(0,114,206,0.15)">
+          ⚡
+        </div>
+        <span class="tech-nm">Microsoft Azure</span>
+      </div>
+
+      <div class="tech-pill">
+        <div class="tech-ico" style="background:rgba(255,60,0,0.1)">
+          🔥
+        </div>
+        <span class="tech-nm">Databricks</span>
+      </div>
+
+      <div class="tech-pill">
+        <div class="tech-ico" style="background:rgba(41,182,246,0.1)">
+          ❄️
+        </div>
+        <span class="tech-nm">Snowflake</span>
+      </div>
+
+      <div class="tech-pill">
+        <div class="tech-ico" style="background:rgba(243,158,0,0.1)">
+          📊
+        </div>
+        <span class="tech-nm">Power BI</span>
+      </div>
+
+      <div class="tech-pill">
+        <div class="tech-ico" style="background:rgba(0,114,206,0.1)">
+          🗄️
+        </div>
+        <span class="tech-nm">Azure Synapse</span>
+      </div>
+
+      <div class="tech-pill">
+        <div class="tech-ico" style="background:rgba(0,120,212,0.1)">
+          🔷
+        </div>
+        <span class="tech-nm">Microsoft Fabric</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<!-- SERVICES -->
+<section id="services">
+
+  <div class="container">
+
+    <div class="fade-up">
+
+      <div class="section-tag">
+        Enterprise Services
+      </div>
+
+      <h2 class="section-h2">
+        Cloud-Native Analytics &<br>
+        Data Infrastructure Solutions
+      </h2>
+
+      <div class="accent-bar"></div>
+
+      <p class="section-sub">
+        Enterprise-grade analytics engineering, reporting automation, and scalable cloud infrastructure built for operational intelligence and modern business growth.
+      </p>
+
+    </div>
+
+    <div class="services-grid fade-up d1">
+
+      <!-- CARD 1 -->
+      <div class="svc-card">
+
+        <div class="svc-num">
+          01 / SERVICE
+        </div>
+
+        <div class="svc-ico">
+
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+
+        </div>
+
+        <div class="svc-title">
+          Enterprise Data Pipeline Automation
+        </div>
+
+        <div class="svc-desc">
+          Scalable ingestion and orchestration systems designed to automate reporting workflows, unify fragmented business data, and improve operational efficiency.
+        </div>
+
+        <div class="enterprise-outcome">
+          Automated reporting infrastructure
+        </div>
+
+        <div class="svc-tags">
+
+          <span class="tag">Azure Data Factory</span>
+
+          <span class="tag">Databricks</span>
+
+          <span class="tag">Delta Lake</span>
+
+          <span class="tag">REST APIs</span>
+
+        </div>
+
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="svc-card">
+
+        <div class="svc-num">
+          02 / SERVICE
+        </div>
+
+        <div class="svc-ico">
+
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+
+        </div>
+
+        <div class="svc-title">
+          Executive Reporting & Operational Analytics
+        </div>
+
+        <div class="svc-desc">
+          Real-time executive dashboards and KPI reporting ecosystems designed for leadership visibility, operational monitoring, and strategic business decisions.
+        </div>
+
+        <div class="enterprise-outcome">
+          Real-time operational visibility
+        </div>
+
+        <div class="svc-tags">
+
+          <span class="tag">Power BI</span>
+
+          <span class="tag">Executive Dashboards</span>
+
+          <span class="tag">DAX</span>
+
+          <span class="tag">KPI Systems</span>
+
+        </div>
+
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="svc-card">
+
+        <div class="svc-num">
+          03 / SERVICE
+        </div>
+
+        <div class="svc-ico">
+
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M18 20V10M12 20V4M6 20v-6"/>
+          </svg>
+
+        </div>
+
+        <div class="svc-title">
+          Cloud Analytics Infrastructure Architecture
+        </div>
+
+        <div class="svc-desc">
+          Modern Azure and Snowflake ecosystems architected for governed analytics, enterprise scalability, security, and AI-ready operational intelligence.
+        </div>
+
+        <div class="enterprise-outcome">
+          Governed enterprise workflows
+        </div>
+
+        <div class="svc-tags">
+
+          <span class="tag">Snowflake</span>
+
+          <span class="tag">Azure Synapse</span>
+
+          <span class="tag">Microsoft Fabric</span>
+
+          <span class="tag">Lakehouse</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CASE STUDIES PREVIEW -->
+<!-- CASE STUDIES PREVIEW -->
+<section id="case-preview">
+
+  <div class="container">
+
+    <div class="fade-up">
+
+      <div class="section-tag">
+        Enterprise Deployments
+      </div>
+
+      <h2 class="section-h2">
+        Modern Analytics Transformations<br>
+        Across High-Growth Industries
+      </h2>
+
+      <div class="accent-bar"></div>
+
+      <p class="section-sub">
+        Enterprise reporting ecosystems and cloud-native analytics infrastructure designed for operational scale, executive visibility, and automated intelligence delivery.
+      </p>
+
+    </div>
+
+    <div class="cases-grid fade-up d1">
+
+      <!-- CASE 1 -->
+      <a href="case-studies.html#cs1" class="case-card">
+
+        <div class="case-industry">
+          E-Commerce Infrastructure
+        </div>
+
+        <div class="case-title">
+          Azure Lakehouse & Executive Analytics Platform
+        </div>
+
+        <div class="case-desc">
+          Unified fragmented reporting systems into a centralized Azure analytics architecture with automated KPI delivery and operational intelligence dashboards.
+        </div>
+
+        <div class="pipeline-flow">
+
+          <div class="pipe-stage">ADF</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Databricks</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Snowflake</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Power BI</div>
+
+        </div>
+
+        <div class="case-results">
+
+          <div class="cr-item">
+
+            <div class="cr-val">
+              68<span>%</span>
+            </div>
+
+            <div class="cr-lbl">
+              Reporting latency reduced
+            </div>
+
+          </div>
+
+          <div class="cr-item">
+
+            <div class="cr-val">
+              40<span>+</span>
+            </div>
+
+            <div class="cr-lbl">
+              Automated workflows
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="case-arrow">
+          View Full Deployment →
+        </div>
+
+      </a>
+
+      <!-- CASE 2 -->
+      <a href="case-studies.html#cs2" class="case-card">
+
+        <div class="case-industry">
+          SaaS Analytics
+        </div>
+
+        <div class="case-title">
+          Real-Time Product Intelligence & Revenue Analytics
+        </div>
+
+        <div class="case-desc">
+          Built a cloud-native analytics ecosystem for executive MRR visibility, product telemetry monitoring, and enterprise operational reporting.
+        </div>
+
+        <div class="pipeline-flow">
+
+          <div class="pipe-stage">Streaming</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Snowflake</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">dbt</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Power BI</div>
+
+        </div>
+
+        <div class="case-results">
+
+          <div class="cr-item">
+
+            <div class="cr-val">
+              23<span>%</span>
+            </div>
+
+            <div class="cr-lbl">
+              Churn reduction
+            </div>
+
+          </div>
+
+          <div class="cr-item">
+
+            <div class="cr-val">
+              3<span>x</span>
+            </div>
+
+            <div class="cr-lbl">
+              Faster executive reporting
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="case-arrow">
+          View Full Deployment →
+        </div>
+
+      </a>
+
+      <!-- CASE 3 -->
+      <a href="case-studies.html#cs3" class="case-card">
+
+        <div class="case-industry">
+          Financial Operations
+        </div>
+
+        <div class="case-title">
+          Regulatory Reporting & Operational Visibility Platform
+        </div>
+
+        <div class="case-desc">
+          Replaced legacy spreadsheet workflows with centralized reporting automation, governance monitoring, and real-time compliance dashboards.
+        </div>
+
+        <div class="pipeline-flow">
+
+          <div class="pipe-stage">APIs</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Fabric</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Lakehouse</div>
+
+          <div class="pipe-arrow">→</div>
+
+          <div class="pipe-stage">Power BI</div>
+
+        </div>
+
+        <div class="case-results">
+
+          <div class="cr-item">
+
+            <div class="cr-val">
+              120<span>+</span>
+            </div>
+
+            <div class="cr-lbl">
+              Reports automated
+            </div>
+
+          </div>
+
+          <div class="cr-item">
+
+            <div class="cr-val">
+              99<span>.9%</span>
+            </div>
+
+            <div class="cr-lbl">
+              Reporting accuracy
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="case-arrow">
+          View Full Deployment →
+        </div>
+
+      </a>
+
+    </div>
+
+    <div style="text-align:center;margin-top:3rem">
+
+      <a href="case-studies.html" class="btn-outline" style="display:inline-flex">
+
+        Explore Enterprise Case Studies →
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROCESS -->
+<!-- PROCESS -->
+<section id="process">
+
+  <div class="container">
+
+    <div class="fade-up">
+
+      <div class="section-tag">
+        Delivery Framework
+      </div>
+
+      <h2 class="section-h2">
+        Enterprise Analytics Delivery<br>
+        Built for Operational Scale
+      </h2>
+
+      <div class="accent-bar"></div>
+
+      <p class="section-sub">
+        Structured cloud implementation workflows focused on reporting modernization, scalable analytics infrastructure, and operational visibility.
+      </p>
+
+    </div>
+
+    <div class="process-grid fade-up d1">
+
+      <!-- STEP 1 -->
+      <div class="process-card">
+
+        <div class="process-num">
+          01
+        </div>
+
+        <div class="process-title">
+          Infrastructure Assessment
+        </div>
+
+        <div class="process-desc">
+          Evaluate reporting workflows, existing architecture, operational bottlenecks, and cloud readiness requirements.
+        </div>
+
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="process-card">
+
+        <div class="process-num">
+          02
+        </div>
+
+        <div class="process-title">
+          Cloud Architecture Design
+        </div>
+
+        <div class="process-desc">
+          Design scalable Azure, Snowflake, and Fabric ecosystems for enterprise-grade analytics and reporting workflows.
+        </div>
+
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="process-card">
+
+        <div class="process-num">
+          03
+        </div>
+
+        <div class="process-title">
+          Pipeline Engineering
+        </div>
+
+        <div class="process-desc">
+          Build governed ingestion systems, automated workflows, and real-time reporting orchestration pipelines.
+        </div>
+
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="process-card">
+
+        <div class="process-num">
+          04
+        </div>
+
+        <div class="process-title">
+          Executive Analytics Deployment
+        </div>
+
+        <div class="process-desc">
+          Deliver operational intelligence dashboards and enterprise KPI ecosystems for leadership visibility.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+
+  <div class="container">
+
+    <div class="fade-up">
+
+      <div class="section-tag">
+        Industry Focus
+      </div>
+
+      <h2 class="section-h2">
+        Analytics Infrastructure Across<br>
+        Modern Digital Industries
+      </h2>
+
+      <div class="accent-bar"></div>
+
+    </div>
+
+    <div class="industries-grid fade-up d1">
+
+      <div class="industry-card">
+
+        <div class="industry-title">
+          SaaS & Technology
+        </div>
+
+        <div class="industry-desc">
+          MRR analytics, product telemetry, customer intelligence, operational reporting.
+        </div>
+
+      </div>
+
+      <div class="industry-card">
+
+        <div class="industry-title">
+          E-Commerce
+        </div>
+
+        <div class="industry-desc">
+          Supply chain visibility, revenue analytics, inventory intelligence, executive dashboards.
+        </div>
+
+      </div>
+
+      <div class="industry-card">
+
+        <div class="industry-title">
+          Financial Services
+        </div>
+
+        <div class="industry-desc">
+          Compliance reporting, governance monitoring, operational risk visibility systems.
+        </div>
+
+      </div>
+
+      <div class="industry-card">
+
+        <div class="industry-title">
+          Healthcare Analytics
+        </div>
+
+        <div class="industry-desc">
+          Reporting automation, centralized operational metrics, healthcare intelligence platforms.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- ABOUT -->
+<section id="about">
+
+  <div class="container">
+
+    <div class="about-inner fade-up">
+
+      <div>
+
+        <div class="section-tag">
+          About AURONEX DATA
+        </div>
+
+        <div class="accent-bar"></div>
+
+        <p class="about-statement">
+
+          <strong>AURONEX DATA</strong> is a modern cloud analytics and data engineering consultancy focused on building scalable enterprise reporting systems, automated pipelines, and operational intelligence platforms.
+
+          <br><br>
+
+          We help organizations eliminate fragmented reporting workflows and transition toward modern cloud-native analytics ecosystems powered by Azure, Databricks, Snowflake, and Microsoft Fabric.
+
+          <br><br>
+
+          Our focus combines:
+          <strong>
+            enterprise architecture,
+            reporting automation,
+            governed analytics,
+            and real-time operational visibility.
+          </strong>
+
+        </p>
+
+      </div>
+
+      <div class="about-stats">
+
+        <div class="a-stat">
+
+          <div class="a-val">
+            40<span>+</span>
+          </div>
+
+          <div class="a-lbl">
+            Automated enterprise pipelines deployed
+          </div>
+
+        </div>
+
+        <div class="a-stat">
+
+          <div class="a-val">
+            99<span>.9%</span>
+          </div>
+
+          <div class="a-lbl">
+            Reporting reliability across cloud systems
+          </div>
+
+        </div>
+
+        <div class="a-stat">
+
+          <div class="a-val">
+            15<span>+</span>
+          </div>
+
+          <div class="a-lbl">
+            Enterprise analytics deployments
+          </div>
+
+        </div>
+
+        <div class="a-stat">
+
+          <div class="a-val">
+            24<span>/7</span>
+          </div>
+
+          <div class="a-lbl">
+            Operational monitoring & workflow visibility
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- CONTACT -->
+<section id="contact">
+
+  <div class="container">
+
+    <div class="contact-inner fade-up">
+
+      <div>
+
+        <div class="section-tag">
+          Enterprise Consultation
+        </div>
+
+        <div class="accent-bar"></div>
+
+        <h2 class="contact-title">
+          Ready to Modernize Your Analytics Infrastructure?
+        </h2>
+
+        <p class="contact-desc">
+          Book a strategic consultation to discuss reporting automation, cloud-native data architecture, operational analytics, and scalable enterprise infrastructure.
+        </p>
+
+        <div class="contact-perks">
+
+          <div class="perk">
+
+            <div class="perk-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.62 1h3a2 2 0 012 1.72 12 12 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+            </div>
+
+            <div class="perk-text">
+              <div class="perk-title">
+                Strategic Architecture Sessions
+              </div>
+
+              <div class="perk-sub">
+                Enterprise analytics consultation
+              </div>
+            </div>
+
+          </div>
+
+          <div class="perk">
+
+            <div class="perk-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+              </svg>
+            </div>
+
+            <div class="perk-text">
+              <div class="perk-title">
+                Enterprise Delivery Standards
+              </div>
+
+              <div class="perk-sub">
+                Cloud-native deployment workflows
+              </div>
+            </div>
+
+          </div>
+
+          <div class="perk">
+
+            <div class="perk-ico">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+
+            <div class="perk-text">
+              <div class="perk-title">
+                24-Hour Response Workflow
+              </div>
+
+              <div class="perk-sub">
+                Enterprise engagement turnaround
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="contact-trust">
+
+          <div class="contact-trust-item">
+
+            <div class="contact-trust-title">
+              Global Remote Delivery
+            </div>
+
+            <div class="contact-trust-sub">
+              International consulting engagements
+            </div>
+
+          </div>
+
+          <div class="contact-trust-item">
+
+            <div class="contact-trust-title">
+              Enterprise Infrastructure
+            </div>
+
+            <div class="contact-trust-sub">
+              Azure • Snowflake • Fabric ecosystem
+            </div>
+
+          </div>
+
+          <div class="contact-trust-item">
+
+            <div class="contact-trust-title">
+              Reporting Automation
+            </div>
+
+            <div class="contact-trust-sub">
+              Real-time operational intelligence
+            </div>
+
+          </div>
+
+          <div class="contact-trust-item">
+
+            <div class="contact-trust-title">
+              Modern Data Stack
+            </div>
+
+            <div class="contact-trust-sub">
+              Cloud-native scalable analytics systems
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <div class="contact-form" id="contactForm">
+
+          <div id="formFields">
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" id="name" placeholder="John Carter">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Work Email</label>
+                <input type="email" class="form-input" id="email" placeholder="john@company.com">
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group">
+                <label class="form-label">Organization</label>
+                <input type="text" class="form-input" id="company" placeholder="Enterprise Company">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Industry</label>
+
+                <select class="form-input form-select" id="industry">
+                  <option value="">Select industry...</option>
+                  <option>E-Commerce</option>
+                  <option>SaaS / Technology</option>
+                  <option>Financial Services</option>
+                  <option>Healthcare</option>
+                  <option>Retail</option>
+                  <option>Other</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Project Requirements
+              </label>
+
+              <textarea class="form-input" id="details" placeholder="Describe your reporting systems, analytics infrastructure, cloud stack, or operational visibility challenges..."></textarea>
+
+            </div>
+
+            <button class="form-submit" onclick="submitForm()">
+              Schedule Enterprise Consultation →
+            </button>
+
+            <div class="form-note">
+              Response within 24 business hours · Secure & confidential
+            </div>
+
+          </div>
+
+          <div class="form-success" id="formSuccess">
+
+            <div class="check-ico">
+
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10D98A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+
+            </div>
+
+            <h3>Consultation Request Submitted</h3>
+
+            <p>
+              Our team will contact you within 24 business hours.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      AURONEX DATA
+    </div>
+
+    <div class="footer-copy">
+      © 2026 AURONEX DATA. Built for modern data-driven organizations.
+    </div>
+
+    <div class="footer-links">
+
+      <a href="#" class="footer-link" title="LinkedIn">
+
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+
+      </a>
+
+      <a href="#" class="footer-link" title="GitHub">
+
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+        </svg>
+
+      </a>
+
+      <a href="mailto:auronexdata@gmail.com" class="footer-link" title="Email">
+
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+
+/* =========================================
+EMAILJS INITIALIZATION
+========================================= */
+
+emailjs.init("jOVfnMmLggxdluUlS");
+
+/* =========================================
+SCROLL ANIMATIONS
+========================================= */
+
+const obs = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+
+  });
+
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.fade-up').forEach(el => {
+  obs.observe(el);
+});
+
+/* =========================================
+NAVBAR SCROLL EFFECT
+========================================= */
+
+const nav = document.getElementById('mainNav');
+
+window.addEventListener('scroll', () => {
+
+  if(window.scrollY > 60){
+
+    nav.style.background = 'rgba(6,9,18,0.96)';
+    nav.style.backdropFilter = 'blur(30px)';
+
+  } else {
+
+    nav.style.background = 'rgba(6,9,18,0.75)';
+    nav.style.backdropFilter = 'blur(20px)';
+
+  }
+
+});
+
+/* =========================================
+CONTACT FORM
+========================================= */
+
+async function submitForm(){
+
+  const btn = document.querySelector('.form-submit');
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const company = document.getElementById('company').value;
+  const industry = document.getElementById('industry').value;
+  const details = document.getElementById('details').value;
+
+  if(!name || !email){
+
+    alert('Please fill in your name and work email.');
+    return;
+
+  }
+
+  btn.innerHTML = 'Submitting...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  try{
+
+    await emailjs.send(
+
+      "service_4aar93d",
+      "template_kmnyll5",
+
+      {
+        from_name: name,
+        from_email: email,
+        company: company,
+        industry: industry,
+        project_details: details,
+        to_email: "auronexdata@gmail.com"
+      }
+
+    );
+
+    document.getElementById('formFields').style.display = 'none';
+
+    document.getElementById('formSuccess').style.display = 'block';
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      'Message failed to send. Please try again.'
+    );
+
+    btn.innerHTML =
+      'Schedule Enterprise Consultation →';
+
+    btn.style.opacity = '1';
+
+    btn.disabled = false;
+
+  }
+
+}
+
+/* =========================================
+SMOOTH SCROLL
+========================================= */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+  anchor.addEventListener('click', function(e){
+
+    e.preventDefault();
+
+    const target =
+      document.querySelector(this.getAttribute('href'));
+
+    if(target){
+
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+    }
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>

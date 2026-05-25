@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies —  AURONEX DATA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #060912; --bg2: #080D1A; --surface: #0D1526; --surface2: #121D33;
+  --border: rgba(99,179,237,0.08); --border2: rgba(99,179,237,0.14);
+  --accent: #1A56DB; --accent2: #4F8EF7; --accent3: #7AB3FF;
+  --cyan: #0EC4F1; --green: #10D98A; --orange: #F59E0B; --purple: #8B5CF6;
+  --text: #EEF4FF; --text2: #8BA6CC; --text3: #4A6080;
+  --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif; --body: 'Outfit', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: linear-gradient(rgba(26,86,219,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(26,86,219,0.025) 1px, transparent 1px);
+  background-size: 56px 56px; pointer-events: none; z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 72px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 3rem;
+  background: rgba(6,9,18,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 15px; color: #fff; box-shadow: 0 0 20px rgba(26,86,219,0.4); }
+.nav-wordmark { font-family: var(--display); font-size: 16px; font-weight: 700; letter-spacing: 0.06em; color: var(--text); }
+.nav-wordmark span { color: var(--accent2); }
+.nav-center { display: flex; align-items: center; gap: 2.5rem; }
+.nav-center a { font-size: 13.5px; color: var(--text2); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; font-weight: 500; }
+.nav-center a:hover, .nav-center a.active { color: var(--text); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.btn-ghost { padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text2); text-decoration: none; border: 1px solid var(--border2); transition: all 0.2s; }
+.btn-ghost:hover { color: var(--text); border-color: rgba(99,179,237,0.25); }
+.btn-nav-cta { padding: 9px 22px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #fff; text-decoration: none; background: linear-gradient(135deg, var(--accent), #1048B0); box-shadow: 0 0 24px rgba(26,86,219,0.35); transition: all 0.2s; border: none; cursor: pointer; }
+.btn-nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 32px rgba(26,86,219,0.5); }
+
+/* PAGE HERO */
+.page-hero {
+  padding: 140px 3rem 6rem; position: relative; z-index: 1;
+  background: linear-gradient(180deg, rgba(26,86,219,0.04) 0%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+}
+.page-hero-inner { max-width: 1280px; margin: 0 auto; }
+.breadcrumb { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; color: var(--text3); margin-bottom: 1.5rem; }
+.breadcrumb a { color: var(--accent2); text-decoration: none; }
+.breadcrumb span { color: var(--text3); }
+.page-tag { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
+.page-h1 { font-family: var(--display); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.25rem; }
+.page-sub { font-size: 1.05rem; color: var(--text2); line-height: 1.8; max-width: 560px; font-weight: 300; }
+.accent-bar { width: 40px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--cyan)); border-radius: 2px; margin: 1rem 0 1.5rem; }
+
+/* FILTER BAR */
+.filter-bar {
+  padding: 1.5rem 3rem; border-bottom: 1px solid var(--border);
+  background: var(--bg2); position: sticky; top: 72px; z-index: 100;
+}
+.filter-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.filter-label { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-right: 0.5rem; }
+.filter-btn {
+  font-family: var(--mono); font-size: 11px; padding: 6px 16px; border-radius: 100px;
+  border: 1px solid var(--border2); background: transparent; color: var(--text2);
+  cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
+}
+.filter-btn:hover, .filter-btn.active { background: rgba(79,142,247,0.12); border-color: rgba(79,142,247,0.35); color: var(--accent2); }
+
+/* CASE STUDIES */
+.cases-section { padding: 5rem 3rem 8rem; position: relative; z-index: 1; }
+.cases-inner { max-width: 1280px; margin: 0 auto; }
+
+/* FEATURED CASE */
+.featured-case {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 20px; overflow: hidden; margin-bottom: 2rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.fc-left { padding: 3.5rem; }
+.fc-right { padding: 2.5rem; background: var(--bg2); border-left: 1px solid var(--border); display: flex; flex-direction: column; gap: 1rem; }
+.case-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 1.25rem;
+}
+.chip-ecom { color: var(--cyan); border: 1px solid rgba(14,196,241,0.25); background: rgba(14,196,241,0.06); }
+.chip-saas { color: var(--purple); border: 1px solid rgba(139,92,246,0.25); background: rgba(139,92,246,0.06); }
+.chip-fin { color: var(--green); border: 1px solid rgba(16,217,138,0.25); background: rgba(16,217,138,0.06); }
+.chip-retail { color: var(--orange); border: 1px solid rgba(245,158,11,0.25); background: rgba(245,158,11,0.06); }
+.chip-health { color: #F472B6; border: 1px solid rgba(244,114,182,0.25); background: rgba(244,114,182,0.06); }
+.chip-supply { color: var(--accent3); border: 1px solid rgba(122,179,255,0.25); background: rgba(122,179,255,0.06); }
+
+.fc-tag { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.fc-title { font-family: var(--display); font-size: clamp(1.4rem, 2vw, 2rem); font-weight: 800; color: var(--text); margin-bottom: 1.25rem; line-height: 1.15; letter-spacing: -0.02em; }
+.block-label { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; margin-top: 1.25rem; }
+.block-text { font-size: 0.9rem; color: var(--text2); line-height: 1.75; font-weight: 300; }
+.results-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 1.5rem; }
+.r-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; }
+.r-val { font-family: var(--display); font-size: 1.8rem; font-weight: 800; color: var(--text); letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; }
+.r-val span { color: var(--accent2); }
+.r-lbl { font-size: 11px; color: var(--text3); line-height: 1.4; }
+.stack-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1.5rem; }
+.s-badge { font-family: var(--mono); font-size: 10px; color: var(--text2); background: var(--surface2); border: 1px solid var(--border2); padding: 4px 12px; border-radius: 100px; }
+
+/* ARCH BOX */
+.arch-box {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem;
+}
+.arch-title { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+.arch-layers { display: flex; flex-direction: column; gap: 6px; }
+.arch-layer { display: flex; align-items: center; gap: 8px; }
+.arch-lbl { font-family: var(--mono); font-size: 9px; color: var(--text3); width: 70px; flex-shrink: 0; text-align: right; }
+.arch-nodes { display: flex; gap: 6px; flex: 1; }
+.arch-node {
+  flex: 1; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 5px; padding: 6px 8px; font-size: 10px;
+  color: var(--text2); text-align: center; white-space: nowrap;
+}
+.arch-node.hi { border-color: rgba(26,86,219,0.3); background: rgba(26,86,219,0.08); color: var(--accent2); }
+.arch-arrow { color: var(--text3); font-size: 10px; text-align: center; margin-left: 78px; padding: 2px 0; }
+
+/* MINI CHART */
+.mini-chart { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.mc-title { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.mini-bars { display: flex; align-items: flex-end; gap: 5px; height: 64px; }
+.mb { flex: 1; border-radius: 3px 3px 0 0; }
+
+/* METRICS PANEL */
+.metrics-panel { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.m-cell { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+.m-val { font-family: var(--display); font-size: 1.3rem; font-weight: 800; color: var(--text); }
+.m-val span { color: var(--accent2); font-size: 0.9rem; }
+.m-lbl { font-family: var(--mono); font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+
+/* CASES GRID */
+.cs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.cs-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; transition: all 0.3s; cursor: default;
+}
+.cs-card:hover { border-color: rgba(79,142,247,0.25); transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.cs-header { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid var(--border); }
+.cs-body { padding: 1.5rem 2rem; }
+.cs-footer { padding: 1.25rem 2rem; border-top: 1px solid var(--border); background: var(--bg2); }
+
+.cs-num { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.1em; margin-bottom: 1rem; }
+.cs-title { font-family: var(--display); font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 1rem; }
+.cs-problem { font-size: 0.85rem; color: var(--text2); line-height: 1.7; font-weight: 300; margin-bottom: 1rem; }
+.cs-solution-lbl { font-family: var(--mono); font-size: 9px; color: var(--accent2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+.cs-solution { font-size: 0.83rem; color: var(--text2); line-height: 1.7; font-weight: 300; }
+
+.cs-results { display: flex; gap: 1.5rem; }
+.csr-val { font-family: var(--display); font-size: 1.5rem; font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1; margin-bottom: 3px; }
+.csr-val span { color: var(--accent2); font-size: 1rem; }
+.csr-lbl { font-size: 11px; color: var(--text3); }
+
+.cs-stack-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.cs-tag { font-family: var(--mono); font-size: 9px; color: var(--accent2); background: rgba(79,142,247,0.07); border: 1px solid rgba(79,142,247,0.15); padding: 3px 9px; border-radius: 100px; }
+
+/* CTA BANNER */
+.cta-banner {
+  background: linear-gradient(135deg, rgba(26,86,219,0.12) 0%, rgba(14,196,241,0.06) 100%);
+  border: 1px solid rgba(26,86,219,0.2); border-radius: 20px;
+  padding: 4rem; text-align: center; margin-top: 4rem;
+}
+.cta-title { font-family: var(--display); font-size: clamp(1.8rem, 2.5vw, 2.5rem); font-weight: 800; color: var(--text); letter-spacing: -0.03em; margin-bottom: 1rem; }
+.cta-sub { font-size: 1rem; color: var(--text2); margin-bottom: 2rem; font-weight: 300; }
+.btn-cta-big {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--accent), #1048B0);
+  color: #fff; padding: 16px 36px; border-radius: 12px;
+  font-family: var(--display); font-size: 16px; font-weight: 700;
+  text-decoration: none; box-shadow: 0 0 50px rgba(26,86,219,0.4);
+  transition: all 0.2s;
+}
+.btn-cta-big:hover { transform: translateY(-2px); box-shadow: 0 10px 60px rgba(26,86,219,0.55); }
+
+/* FOOTER */
+footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3rem 0; }
+.footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 3rem; display: flex; align-items: center; justify-content: space-between; }
+.footer-brand { font-family: var(--display); font-size: 14px; font-weight: 700; letter-spacing: 0.06em; color: var(--text3); }
+.footer-copy { font-size: 12px; color: var(--text3); }
+.footer-links { display: flex; gap: 10px; }
+.footer-link { width: 36px; height: 36px; border-radius: 9px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text3); text-decoration: none; transition: all 0.2s; }
+.footer-link:hover { border-color: var(--border2); color: var(--text2); }
+.footer-link svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.d1{transition-delay:0.1s} .d2{transition-delay:0.2s} .d3{transition-delay:0.3s}
+
+@media(max-width:900px) {
+  .featured-case { grid-template-columns: 1fr; }
+  .fc-right { border-left: none; border-top: 1px solid var(--border); }
+  .cs-grid { grid-template-columns: 1fr; }
+  nav .nav-center { display: none; }
+  .filter-inner { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">AX</div>
+    <span class="nav-wordmark"> AURONEX <span>DATA</span></span>
+  </a>
+  <div class="nav-center">
+    <a href="index.html#services">Services</a>
+    <a href="case-studies.html" class="active">Case Studies</a>
+    <a href="index.html#process">Process</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="index.html#about">About</a>
+  </div>
+  <div class="nav-right">
+    <a href="auth.html" class="btn-ghost">Sign In</a>
+    <a href="auth.html#signup" class="btn-nav-cta">Get Started →</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Case Studies</span>
+    </div>
+    <div class="page-tag">Proven Results</div>
+    <h1 class="page-h1">6 Enterprise Data<br>Transformations</h1>
+    <div class="accent-bar"></div>
+    <p class="page-sub">Real projects. Real outcomes. See how we've helped businesses across industries eliminate manual processes and unlock real-time intelligence.</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Filter by:</span>
+    <button class="filter-btn active" onclick="filterCases('all', this)">All Industries</button>
+    <button class="filter-btn" onclick="filterCases('ecommerce', this)">E-Commerce</button>
+    <button class="filter-btn" onclick="filterCases('saas', this)">SaaS</button>
+    <button class="filter-btn" onclick="filterCases('fintech', this)">Financial</button>
+    <button class="filter-btn" onclick="filterCases('retail', this)">Retail</button>
+    <button class="filter-btn" onclick="filterCases('health', this)">Healthcare</button>
+    <button class="filter-btn" onclick="filterCases('supply', this)">Supply Chain</button>
+  </div>
+</div>
+
+<div class="cases-section">
+  <div class="cases-inner">
+
+    <!-- CASE 1 — FEATURED -->
+    <div class="featured-case fade-up" id="cs1" data-industry="ecommerce">
+      <div class="fc-left">
+        <div class="case-chip chip-ecom">E-Commerce</div>
+        <div class="fc-title">Azure Lakehouse & BI Platform for E-Commerce Analytics</div>
+        <div class="block-label">Business Problem</div>
+        <div class="block-text">A mid-sized e-commerce retailer operated with 14+ disconnected data sources and no single source of truth. Finance teams spent 40+ hours weekly on manual Excel reporting. Leadership had zero real-time visibility into operations, revenue, or customer behavior.</div>
+        <div class="block-label">Solution Delivered</div>
+        <div class="block-text"> AURONEX DATA architected a full Azure Lakehouse using Medallion Architecture with automated ADF pipelines ingesting from Shopify, SAP, and CRM into a unified Synapse Analytics layer, surfaced via executive Power BI dashboards with role-based access control.</div>
+        <div class="results-row">
+          <div class="r-card"><div class="r-val">40<span>hrs</span></div><div class="r-lbl">Weekly reporting time eliminated</div></div>
+          <div class="r-card"><div class="r-val"><span>$</span>1.2M</div><div class="r-lbl">Operational cost savings identified</div></div>
+          <div class="r-card"><div class="r-val">99<span>.9%</span></div><div class="r-lbl">Pipeline uptime SLA achieved</div></div>
+          <div class="r-card"><div class="r-val">14<span>→1</span></div><div class="r-lbl">Data sources consolidated</div></div>
+        </div>
+        <div class="stack-row">
+          <span class="s-badge">Azure Data Factory</span>
+          <span class="s-badge">Azure Synapse</span>
+          <span class="s-badge">Delta Lake</span>
+          <span class="s-badge">Power BI</span>
+          <span class="s-badge">Python</span>
+          <span class="s-badge">Databricks</span>
+        </div>
+      </div>
+      <div class="fc-right">
+        <div class="arch-box">
+          <div class="arch-title">Azure Medallion Architecture</div>
+          <div class="arch-layers">
+            <div class="arch-layer">
+              <div class="arch-lbl">Sources</div>
+              <div class="arch-nodes">
+                <div class="arch-node">Shopify</div>
+                <div class="arch-node">SAP ERP</div>
+                <div class="arch-node">CRM</div>
+              </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-lbl">Ingest</div>
+              <div class="arch-nodes">
+                <div class="arch-node hi">Azure Data Factory</div>
+                <div class="arch-node hi">ADF Pipelines</div>
+              </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-lbl">Storage</div>
+              <div class="arch-nodes">
+                <div class="arch-node">Bronze</div>
+                <div class="arch-node">Silver</div>
+                <div class="arch-node hi">Gold</div>
+              </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-lbl">Analytics</div>
+              <div class="arch-nodes">
+                <div class="arch-node hi">Synapse</div>
+                <div class="arch-node hi">Databricks</div>
+              </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+              <div class="arch-lbl">BI Layer</div>
+              <div class="arch-nodes">
+                <div class="arch-node hi">Power BI</div>
+                <div class="arch-node">Reports</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mini-chart">
+          <div class="mc-title">Revenue Trend Post-Implementation</div>
+          <div class="mini-bars">
+            <div class="mb" style="height:35%;background:rgba(26,86,219,0.25)"></div>
+            <div class="mb" style="height:42%;background:rgba(26,86,219,0.3)"></div>
+            <div class="mb" style="height:50%;background:rgba(26,86,219,0.35)"></div>
+            <div class="mb" style="height:60%;background:rgba(26,86,219,0.4)"></div>
+            <div class="mb" style="height:68%;background:rgba(79,142,247,0.5)"></div>
+            <div class="mb" style="height:78%;background:rgba(79,142,247,0.6)"></div>
+            <div class="mb" style="height:88%;background:rgba(122,179,255,0.7)"></div>
+            <div class="mb" style="height:100%;background:#4F8EF7"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASES GRID: 5 More -->
+    <div class="cs-grid">
+
+      <!-- CASE 2 -->
+      <div class="cs-card fade-up" id="cs2" data-industry="saas">
+        <div class="cs-header">
+          <div class="cs-num">02 / CASE STUDY</div>
+          <div class="case-chip chip-saas">SaaS / Technology</div>
+          <div class="cs-title">Real-Time SaaS Analytics & ML-Powered Churn Prediction Engine</div>
+          <div class="cs-problem">A Series B SaaS company had no visibility into product usage patterns or leading indicators of churn. Customer success relied entirely on gut feel. Monthly revenue reporting took 3 days to compile.</div>
+          <div class="cs-solution-lbl">Solution</div>
+          <div class="cs-solution">Built product usage telemetry pipeline on Snowflake with Databricks ML for churn scoring, automated MRR/ARR dashboards, and cohort analysis for 50K+ active users updated every 15 minutes.</div>
+        </div>
+        <div class="cs-body">
+          <div class="metrics-panel">
+            <div class="mc-title">Key Outcomes</div>
+            <div class="m-grid">
+              <div class="m-cell"><div class="m-val">23<span>%</span></div><div class="m-lbl">Churn Reduced</div></div>
+              <div class="m-cell"><div class="m-val"><span>$</span>800K</div><div class="m-lbl">ARR Retained</div></div>
+              <div class="m-cell"><div class="m-val">3<span>days→</span></div><div class="m-lbl">15min reporting</div></div>
+              <div class="m-cell"><div class="m-val">94<span>%</span></div><div class="m-lbl">Churn Accuracy</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-stack-row">
+            <span class="cs-tag">Snowflake</span>
+            <span class="cs-tag">Databricks ML</span>
+            <span class="cs-tag">dbt</span>
+            <span class="cs-tag">Power BI</span>
+            <span class="cs-tag">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 3 -->
+      <div class="cs-card fade-up d1" id="cs3" data-industry="fintech">
+        <div class="cs-header">
+          <div class="cs-num">03 / CASE STUDY</div>
+          <div class="case-chip chip-fin">Financial Services</div>
+          <div class="cs-title">Regulatory Reporting Automation for FinTech Platform</div>
+          <div class="cs-problem">A fast-growing FinTech had 120+ manual Excel-based regulatory reports submitted monthly. The compliance team spent 60% of their time on data gathering, leaving no capacity for actual analysis or risk management.</div>
+          <div class="cs-solution-lbl">Solution</div>
+          <div class="cs-solution">Designed end-to-end compliance data pipeline with Azure Data Factory, centralized audit trail in Azure Synapse, and automated report generation with approval workflows and regulatory submission tracking.</div>
+        </div>
+        <div class="cs-body">
+          <div class="metrics-panel">
+            <div class="mc-title">Key Outcomes</div>
+            <div class="m-grid">
+              <div class="m-cell"><div class="m-val">120<span>+</span></div><div class="m-lbl">Reports Automated</div></div>
+              <div class="m-cell"><div class="m-val">99<span>.9%</span></div><div class="m-lbl">Accuracy SLA</div></div>
+              <div class="m-cell"><div class="m-val">60<span>%</span></div><div class="m-lbl">Time Reclaimed</div></div>
+              <div class="m-cell"><div class="m-val">0<span> fines</span></div><div class="m-lbl">Compliance Record</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-stack-row">
+            <span class="cs-tag">Azure Synapse</span>
+            <span class="cs-tag">ADF</span>
+            <span class="cs-tag">SQL Server</span>
+            <span class="cs-tag">Power BI</span>
+            <span class="cs-tag">Azure Key Vault</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 4 -->
+      <div class="cs-card fade-up d2" id="cs4" data-industry="retail">
+        <div class="cs-header">
+          <div class="cs-num">04 / CASE STUDY</div>
+          <div class="case-chip chip-retail">Retail</div>
+          <div class="cs-title">Multi-Store Retail Intelligence & Demand Forecasting Platform</div>
+          <div class="cs-problem">A 200-store retail chain had no centralized performance visibility. Store managers made inventory decisions based on outdated weekly snapshots. Stockouts cost the business an estimated $3M annually in lost sales.</div>
+          <div class="cs-solution-lbl">Solution</div>
+          <div class="cs-solution">Unified POS data from 200 locations into a Microsoft Fabric lakehouse with real-time store performance dashboards, ML-powered demand forecasting, and automated purchase order triggers when stock drops below thresholds.</div>
+        </div>
+        <div class="cs-body">
+          <div class="metrics-panel">
+            <div class="mc-title">Key Outcomes</div>
+            <div class="m-grid">
+              <div class="m-cell"><div class="m-val"><span>$</span>2.1M</div><div class="m-lbl">Lost Sales Recovered</div></div>
+              <div class="m-cell"><div class="m-val">31<span>%</span></div><div class="m-lbl">Stockout Reduction</div></div>
+              <div class="m-cell"><div class="m-val">200<span>+</span></div><div class="m-lbl">Stores Connected</div></div>
+              <div class="m-cell"><div class="m-val">15<span>min</span></div><div class="m-lbl">Data Freshness</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-stack-row">
+            <span class="cs-tag">Microsoft Fabric</span>
+            <span class="cs-tag">Power BI</span>
+            <span class="cs-tag">Azure ML</span>
+            <span class="cs-tag">SQL</span>
+            <span class="cs-tag">PySpark</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 5 -->
+      <div class="cs-card fade-up" id="cs5" data-industry="health">
+        <div class="cs-header">
+          <div class="cs-num">05 / CASE STUDY</div>
+          <div class="case-chip chip-health">Healthcare</div>
+          <div class="cs-title">Hospital Operations Analytics & Patient Flow Intelligence</div>
+          <div class="cs-problem">A regional hospital network with 8 facilities had no unified view of patient flow, bed utilization, or staffing efficiency. Department heads operated in silos, leading to resource misallocation and extended wait times.</div>
+          <div class="cs-solution-lbl">Solution</div>
+          <div class="cs-solution">Built a HIPAA-compliant Azure healthcare data platform ingesting EMR, scheduling, and billing systems into a centralized lakehouse with real-time operational dashboards and predictive bed demand models.</div>
+        </div>
+        <div class="cs-body">
+          <div class="metrics-panel">
+            <div class="mc-title">Key Outcomes</div>
+            <div class="m-grid">
+              <div class="m-cell"><div class="m-val">18<span>%</span></div><div class="m-lbl">Wait Times Reduced</div></div>
+              <div class="m-cell"><div class="m-val">22<span>%</span></div><div class="m-lbl">Bed Utilization Gain</div></div>
+              <div class="m-cell"><div class="m-val">8<span> sites</span></div><div class="m-lbl">Unified</div></div>
+              <div class="m-cell"><div class="m-val">100<span>%</span></div><div class="m-lbl">HIPAA Compliant</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-stack-row">
+            <span class="cs-tag">Azure Health Data</span>
+            <span class="cs-tag">Synapse</span>
+            <span class="cs-tag">Power BI</span>
+            <span class="cs-tag">Python</span>
+            <span class="cs-tag">FHIR APIs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 6 -->
+      <div class="cs-card fade-up d1" id="cs6" data-industry="supply">
+        <div class="cs-header">
+          <div class="cs-num">06 / CASE STUDY</div>
+          <div class="case-chip chip-supply">Supply Chain</div>
+          <div class="cs-title">End-to-End Supply Chain Visibility & Logistics Intelligence Platform</div>
+          <div class="cs-problem">A global logistics company managing 50K+ shipments monthly had no real-time visibility across its carrier network. Delay detection relied on customer complaints. Forecasting was spreadsheet-based and consistently inaccurate by 30%+.</div>
+          <div class="cs-solution-lbl">Solution</div>
+          <div class="cs-solution">Designed a real-time supply chain data platform on Databricks with streaming carrier API ingestion, automated exception alerting, predictive delay scoring, and executive logistics dashboards for 12 global markets.</div>
+        </div>
+        <div class="cs-body">
+          <div class="metrics-panel">
+            <div class="mc-title">Key Outcomes</div>
+            <div class="m-grid">
+              <div class="m-cell"><div class="m-val">85<span>%</span></div><div class="m-lbl">Delay Detection Rate</div></div>
+              <div class="m-cell"><div class="m-val">30<span>min</span></div><div class="m-lbl">Exception Alert Time</div></div>
+              <div class="m-cell"><div class="m-val">50K<span>+</span></div><div class="m-lbl">Shipments/Month</div></div>
+              <div class="m-cell"><div class="m-val"><span>$</span>4.8M</div><div class="m-lbl">SLA Penalties Avoided</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-stack-row">
+            <span class="cs-tag">Databricks</span>
+            <span class="cs-tag">Azure Event Hubs</span>
+            <span class="cs-tag">Delta Streaming</span>
+            <span class="cs-tag">Power BI</span>
+            <span class="cs-tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASE 7 — Bonus -->
+      <div class="cs-card fade-up d2" id="cs7" data-industry="saas">
+        <div class="cs-header">
+          <div class="cs-num">07 / CASE STUDY</div>
+          <div class="case-chip chip-saas">SaaS / MarTech</div>
+          <div class="cs-title">Unified Marketing Attribution & Campaign Intelligence for B2B SaaS</div>
+          <div class="cs-problem">A B2B SaaS marketing team spent $2M+ annually on digital campaigns with no ability to measure true multi-touch attribution. CAC calculations were inaccurate. Budget allocation was based on last-click data that misrepresented funnel contribution.</div>
+          <div class="cs-solution-lbl">Solution</div>
+          <div class="cs-solution">Built multi-touch attribution data model in Snowflake ingesting from HubSpot, Google Ads, LinkedIn, Salesforce, and website analytics. Delivered a unified marketing ROI dashboard with algorithmic attribution models updated daily.</div>
+        </div>
+        <div class="cs-body">
+          <div class="metrics-panel">
+            <div class="mc-title">Key Outcomes</div>
+            <div class="m-grid">
+              <div class="m-cell"><div class="m-val">38<span>%</span></div><div class="m-lbl">ROAS Improvement</div></div>
+              <div class="m-cell"><div class="m-val"><span>$</span>620K</div><div class="m-lbl">Budget Reallocated</div></div>
+              <div class="m-cell"><div class="m-val">6<span> sources</span></div><div class="m-lbl">Unified</div></div>
+              <div class="m-cell"><div class="m-val">45<span>%</span></div><div class="m-lbl">CAC Accuracy Gain</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-stack-row">
+            <span class="cs-tag">Snowflake</span>
+            <span class="cs-tag">dbt</span>
+            <span class="cs-tag">HubSpot API</span>
+            <span class="cs-tag">Salesforce</span>
+            <span class="cs-tag">Power BI</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end cs-grid -->
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner fade-up">
+      <div class="cta-title">Ready to Be Our Next Case Study?</div>
+      <div class="cta-sub">Book a free discovery call and let's explore what  AURONEX DATA can build for your business.</div>
+      <a href="index.html#contact" class="btn-cta-big">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>
+        Schedule Free Strategy Call
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"> AURONEX DATA</div>
+    <div class="footer-copy">© 2025  AURONEX DATA. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#" class="footer-link"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="mailto:sripadaarun05@gmail.com" class="footer-link"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+function filterCases(industry, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('[data-industry]').forEach(card => {
+    if(industry === 'all' || card.dataset.industry === industry) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// scroll to anchor if hash present
+if(location.hash) {
+  setTimeout(() => {
+    const el = document.querySelector(location.hash);
+    if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+</script>
+</body>
+</html>

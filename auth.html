@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In / Sign Up —  AURONEX DATA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #060912; --bg2: #080D1A; --surface: #0D1526; --surface2: #121D33;
+  --border: rgba(99,179,237,0.08); --border2: rgba(99,179,237,0.14);
+  --accent: #1A56DB; --accent2: #4F8EF7; --accent3: #7AB3FF;
+  --cyan: #0EC4F1; --green: #10D98A; --red: #F43F5E;
+  --text: #EEF4FF; --text2: #8BA6CC; --text3: #4A6080;
+  --mono: 'DM Mono', monospace; --display: 'Syne', sans-serif; --body: 'Outfit', sans-serif;
+}
+html, body { height: 100%; }
+body { font-family: var(--body); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: linear-gradient(rgba(26,86,219,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(26,86,219,0.03) 1px, transparent 1px);
+  background-size: 56px 56px; pointer-events: none; z-index: 0;
+}
+
+/* ORB BG */
+.bg-orb {
+  position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0;
+}
+.o1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(26,86,219,0.12), transparent 70%); top: -200px; left: -200px; }
+.o2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(14,196,241,0.07), transparent 70%); bottom: -100px; right: -100px; animation: float2 10s ease-in-out infinite; }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 68px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 3rem;
+  background: rgba(6,9,18,0.88); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-mark { width: 34px; height: 34px; background: linear-gradient(135deg, var(--accent), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 14px; color: #fff; box-shadow: 0 0 18px rgba(26,86,219,0.4); }
+.nav-wordmark { font-family: var(--display); font-size: 15px; font-weight: 700; letter-spacing: 0.06em; color: var(--text); }
+.nav-wordmark span { color: var(--accent2); }
+.back-link { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+.back-link:hover { color: var(--text); }
+.back-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+/* MAIN LAYOUT */
+main {
+  flex: 1; display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 68px; position: relative; z-index: 1;
+}
+
+/* LEFT PANEL */
+.auth-left {
+  background: linear-gradient(160deg, rgba(26,86,219,0.08) 0%, rgba(14,196,241,0.04) 100%);
+  border-right: 1px solid var(--border);
+  padding: 5rem 4rem;
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: calc(100vh - 68px);
+}
+
+.left-tag { font-family: var(--mono); font-size: 10px; color: var(--cyan); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.left-title { font-family: var(--display); font-size: clamp(2rem, 3vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 1.25rem; }
+.gradient-text { background: linear-gradient(135deg, var(--accent3), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.left-desc { font-size: 1rem; color: var(--text2); line-height: 1.8; font-weight: 300; margin-bottom: 3rem; max-width: 420px; }
+.accent-bar { width: 36px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--cyan)); border-radius: 2px; margin: 1rem 0 1.5rem; }
+
+.benefits { display: flex; flex-direction: column; gap: 16px; margin-bottom: 3rem; }
+.benefit { display: flex; align-items: flex-start; gap: 14px; }
+.benefit-ico {
+  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+}
+.benefit-ico svg { width: 18px; height: 18px; fill: none; stroke-width: 1.8; }
+.b-blue { background: rgba(26,86,219,0.14); border: 1px solid rgba(79,142,247,0.2); }
+.b-blue svg { stroke: var(--accent2); }
+.b-cyan { background: rgba(14,196,241,0.1); border: 1px solid rgba(14,196,241,0.2); }
+.b-cyan svg { stroke: var(--cyan); }
+.b-green { background: rgba(16,217,138,0.1); border: 1px solid rgba(16,217,138,0.2); }
+.b-green svg { stroke: var(--green); }
+.benefit-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.benefit-sub { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+.testimonial {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: 16px; padding: 1.75rem;
+}
+.quote { font-size: 0.95rem; color: var(--text2); line-height: 1.7; font-style: italic; font-weight: 300; margin-bottom: 1rem; }
+.quote::before { content: '"'; font-family: var(--display); font-size: 2rem; color: var(--accent2); line-height: 0; vertical-align: -0.5rem; margin-right: 4px; }
+.testi-author { display: flex; align-items: center; gap: 10px; }
+.testi-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 13px; color: #fff; }
+.testi-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.testi-role { font-size: 11px; color: var(--text3); }
+
+/* RIGHT PANEL */
+.auth-right {
+  display: flex; align-items: center; justify-content: center;
+  padding: 4rem 4rem; min-height: calc(100vh - 68px);
+}
+
+.auth-box {
+  width: 100%; max-width: 440px;
+}
+
+.auth-tabs {
+  display: flex; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: 12px;
+  padding: 4px; margin-bottom: 2.5rem;
+}
+.auth-tab {
+  flex: 1; padding: 10px;
+  font-family: var(--display); font-size: 14px; font-weight: 600;
+  color: var(--text2); border: none; background: transparent;
+  border-radius: 9px; cursor: pointer; transition: all 0.2s;
+}
+.auth-tab.active {
+  background: linear-gradient(135deg, var(--accent), #1048B0);
+  color: #fff; box-shadow: 0 0 20px rgba(26,86,219,0.35);
+}
+
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+
+.auth-title { font-family: var(--display); font-size: 1.6rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.auth-sub { font-size: 14px; color: var(--text3); margin-bottom: 2rem; }
+
+.form-group { margin-bottom: 1.25rem; }
+.form-label { display: block; font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--text2); margin-bottom: 7px; letter-spacing: 0.08em; text-transform: uppercase; }
+.form-input {
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: 10px;
+  padding: 13px 16px; font-family: var(--body);
+  font-size: 14px; color: var(--text); outline: none; transition: all 0.2s;
+}
+.form-input:focus { border-color: rgba(79,142,247,0.55); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+.form-input::placeholder { color: var(--text3); }
+.form-input.error { border-color: rgba(244,63,94,0.5); box-shadow: 0 0 0 3px rgba(244,63,94,0.08); }
+
+.input-icon-wrap { position: relative; }
+.input-icon-wrap .form-input { padding-left: 44px; }
+.input-icon {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; pointer-events: none;
+}
+.input-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--text3); stroke-width: 1.8; }
+
+.toggle-pass {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  cursor: pointer; color: var(--text3); transition: color 0.2s;
+}
+.toggle-pass:hover { color: var(--text2); }
+.toggle-pass svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.password-strength { margin-top: 6px; }
+.strength-bar { height: 3px; border-radius: 2px; background: var(--border); overflow: hidden; }
+.strength-fill { height: 100%; border-radius: 2px; transition: all 0.3s; width: 0; }
+.strength-label { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-top: 4px; letter-spacing: 0.06em; }
+
+.remember-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.checkbox-wrap { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.checkbox-wrap input { display: none; }
+.custom-check {
+  width: 18px; height: 18px; border: 1px solid var(--border2);
+  border-radius: 5px; background: var(--surface2);
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.checkbox-wrap input:checked + .custom-check { background: var(--accent); border-color: var(--accent); }
+.custom-check svg { width: 10px; height: 10px; fill: none; stroke: #fff; stroke-width: 2.5; opacity: 0; transition: opacity 0.2s; }
+.checkbox-wrap input:checked + .custom-check svg { opacity: 1; }
+.check-label { font-size: 13px; color: var(--text2); }
+.forgot-link { font-size: 12px; color: var(--accent2); text-decoration: none; font-family: var(--mono); letter-spacing: 0.04em; }
+.forgot-link:hover { text-decoration: underline; }
+
+.btn-auth {
+  width: 100%; background: linear-gradient(135deg, var(--accent), #1048B0);
+  color: #fff; border: none; border-radius: 10px;
+  padding: 14px; font-family: var(--display);
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 0 40px rgba(26,86,219,0.3);
+  margin-bottom: 1.25rem; letter-spacing: 0.01em;
+}
+.btn-auth:hover { transform: translateY(-1px); box-shadow: 0 8px 40px rgba(26,86,219,0.5); }
+.btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.divider-or {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.divider-or::before, .divider-or::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
+.divider-or span { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.08em; }
+
+.btn-social {
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: 10px;
+  padding: 12px; font-family: var(--body);
+  font-size: 14px; font-weight: 500; color: var(--text2);
+  cursor: pointer; transition: all 0.2s; display: flex;
+  align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;
+}
+.btn-social:hover { border-color: rgba(99,179,237,0.25); color: var(--text); background: var(--surface2); }
+.btn-social svg { width: 18px; height: 18px; }
+
+.form-note { text-align: center; font-size: 12px; color: var(--text3); margin-top: 1rem; line-height: 1.6; }
+.form-note a { color: var(--accent2); text-decoration: none; }
+.form-note a:hover { text-decoration: underline; }
+
+/* ERROR / SUCCESS MESSAGES */
+.msg { display: none; padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 1rem; }
+.msg.error { background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.25); color: #FDA4AF; display: flex; align-items: center; gap: 8px; }
+.msg.success { background: rgba(16,217,138,0.1); border: 1px solid rgba(16,217,138,0.25); color: #6EE7B7; display: flex; align-items: center; gap: 8px; }
+.msg svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; flex-shrink: 0; }
+
+/* TERMS */
+.terms-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.5rem; }
+.terms-text { font-size: 12px; color: var(--text3); line-height: 1.5; }
+.terms-text a { color: var(--accent2); text-decoration: none; }
+
+/* FOOTER */
+.auth-footer { text-align: center; padding: 1.5rem 3rem; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); position: relative; z-index: 1; }
+.auth-footer a { color: var(--text3); text-decoration: none; margin: 0 0.75rem; }
+.auth-footer a:hover { color: var(--text2); }
+
+/* SUCCESS SCREEN */
+.auth-success {
+  display: none; text-align: center; padding: 2rem 0;
+}
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(16,217,138,0.12); border: 2px solid rgba(16,217,138,0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: popIn 0.4s ease;
+}
+@keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.success-icon svg { width: 32px; height: 32px; fill: none; stroke: var(--green); stroke-width: 2.5; }
+.success-title { font-family: var(--display); font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.75rem; }
+.success-sub { font-size: 14px; color: var(--text2); margin-bottom: 2rem; line-height: 1.6; }
+.btn-go { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--accent), #1048B0); color: #fff; padding: 13px 28px; border-radius: 10px; font-family: var(--display); font-size: 14px; font-weight: 700; text-decoration: none; box-shadow: 0 0 30px rgba(26,86,219,0.35); transition: all 0.2s; }
+.btn-go:hover { transform: translateY(-1px); box-shadow: 0 6px 36px rgba(26,86,219,0.5); }
+
+@media(max-width:900px) {
+  main { grid-template-columns: 1fr; }
+  .auth-left { display: none; }
+  .auth-right { padding: 2.5rem 1.5rem; align-items: flex-start; padding-top: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-orb o1"></div>
+<div class="bg-orb o2"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">AX</div>
+    <span class="nav-wordmark">AURONEX<span>DATA</span></span>
+  </a>
+  <a href="index.html" class="back-link">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Homepage
+  </a>
+</nav>
+
+<main>
+  <!-- LEFT PANEL -->
+  <div class="auth-left">
+    <div class="left-tag">Secure Portal</div>
+    <h2 class="left-title">Access Your<br><span class="gradient-text">Data Platform</span></h2>
+    <div class="accent-bar"></div>
+    <p class="left-desc">Sign in to your  AURONEX DATA client portal to access project dashboards, deliverables, documentation, and real-time pipeline monitoring.</p>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-ico b-blue">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">Live Executive Dashboards</div>
+          <div class="benefit-sub">Access real-time Power BI reports and KPI dashboards built for your business</div>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-ico b-cyan">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">Pipeline Health Monitoring</div>
+          <div class="benefit-sub">Monitor all your data pipelines and get instant alerts when something needs attention</div>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-ico b-green">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <div>
+          <div class="benefit-title">Project Documentation & Roadmap</div>
+          <div class="benefit-sub">Architecture docs, delivery roadmap, and knowledge base for your entire platform</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="quote"> AURONEX DATA didn't just build us dashboards — they transformed how our entire leadership team makes decisions. Real-time data is now our biggest competitive advantage.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">MK</div>
+        <div>
+          <div class="testi-name">Marcus Keller</div>
+          <div class="testi-role">CTO, NovaBridge Commerce</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="auth-right">
+    <div class="auth-box">
+
+      <!-- TABS -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="signinTab" onclick="switchTab('signin')">Sign In</button>
+        <button class="auth-tab" id="signupTab" onclick="switchTab('signup')">Create Account</button>
+      </div>
+
+      <!-- SIGN IN PANEL -->
+      <div class="form-panel active" id="signinPanel">
+        <div class="auth-title">Welcome back</div>
+        <div class="auth-sub">Sign in to your  AURONEX DATA client portal</div>
+
+        <div class="msg error" id="siError">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          <span id="siErrorMsg">Invalid email or password. Please try again.</span>
+        </div>
+        <div class="msg success" id="siSuccess">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Signed in successfully! Redirecting...
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Work Email</label>
+          <div class="input-icon-wrap">
+            <div class="input-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <input type="email" class="form-input" id="siEmail" placeholder="you@company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-icon-wrap" style="position:relative">
+            <div class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+            <input type="password" class="form-input" id="siPassword" placeholder="••••••••" style="padding-right:44px">
+            <span class="toggle-pass" onclick="togglePass('siPassword', this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%)">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="remember-row">
+          <label class="checkbox-wrap">
+            <input type="checkbox" id="rememberMe">
+            <div class="custom-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <span class="check-label">Remember me</span>
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <button class="btn-auth" onclick="handleSignIn()">Sign In to Portal</button>
+        <div class="divider-or"><span>OR CONTINUE WITH</span></div>
+        <button class="btn-social" onclick="socialAuth('Google')">
+          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+        <button class="btn-social" onclick="socialAuth('Microsoft')">
+          <svg viewBox="0 0 24 24" width="18" height="18"><rect x="1" y="1" width="10" height="10" fill="#F25022"/><rect x="13" y="1" width="10" height="10" fill="#7FBA00"/><rect x="1" y="13" width="10" height="10" fill="#00A4EF"/><rect x="13" y="13" width="10" height="10" fill="#FFB900"/></svg>
+          Continue with Microsoft
+        </button>
+        <div class="form-note">Don't have an account? <a href="#" onclick="switchTab('signup')">Create one free →</a></div>
+      </div>
+
+      <!-- SIGN UP PANEL -->
+      <div class="form-panel" id="signupPanel">
+        <div id="signupFormContent">
+          <div class="auth-title">Create Account</div>
+          <div class="auth-sub">Start your data transformation journey today</div>
+
+          <div class="msg error" id="suError">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <span id="suErrorMsg">Please fill all required fields correctly.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" id="suFirst" placeholder="Sarah">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" id="suLast" placeholder="Johnson">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Work Email</label>
+            <div class="input-icon-wrap">
+              <div class="input-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <input type="email" class="form-input" id="suEmail" placeholder="sarah@company.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <div class="input-icon-wrap">
+              <div class="input-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <input type="text" class="form-input" id="suCompany" placeholder="Acme Corporation">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-icon-wrap" style="position:relative">
+              <div class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+              <input type="password" class="form-input" id="suPassword" placeholder="Min. 8 characters" style="padding-right:44px" oninput="checkStrength(this.value)">
+              <span class="toggle-pass" onclick="togglePass('suPassword', this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%)">
+                <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </span>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+              <div class="strength-label" id="strengthLabel"></div>
+            </div>
+          </div>
+          <div class="terms-check">
+            <label class="checkbox-wrap" style="flex-shrink:0;margin-top:2px">
+              <input type="checkbox" id="termsCheck">
+              <div class="custom-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+            </label>
+            <div class="terms-text">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand my data will be processed securely.</div>
+          </div>
+          <button class="btn-auth" onclick="handleSignUp()">Create Account →</button>
+          <div class="divider-or"><span>OR CONTINUE WITH</span></div>
+          <button class="btn-social" onclick="socialAuth('Google')">
+            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Continue with Google
+          </button>
+          <div class="form-note">Already have an account? <a href="#" onclick="switchTab('signin')">Sign in →</a></div>
+        </div>
+        <!-- Success state -->
+        <div class="auth-success" id="signupSuccess">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div class="success-title">Account Created!</div>
+          <div class="success-sub">Welcome to  AURONEX DATA. We've sent a confirmation email to <strong id="confirmedEmail"></strong>. Check your inbox to verify your account.</div>
+          <a href="index.html" class="btn-go">Go to Homepage →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<div class="auth-footer">
+  <a href="index.html">Home</a>
+  <a href="case-studies.html">Case Studies</a>
+  <a href="#">Privacy Policy</a>
+  <a href="#">Terms of Service</a>
+  <span>· © 2025  AURONEX DATA</span>
+</div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Replace with your public key
+
+// Switch between sign in / sign up
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  if(tab === 'signin') {
+    document.getElementById('signinTab').classList.add('active');
+    document.getElementById('signinPanel').classList.add('active');
+  } else {
+    document.getElementById('signupTab').classList.add('active');
+    document.getElementById('signupPanel').classList.add('active');
+  }
+}
+
+// Check URL hash on load
+if(location.hash === '#signup') switchTab('signup');
+
+// Toggle password visibility
+function togglePass(id, btn) {
+  const input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+// Password strength
+function checkStrength(val) {
+  const fill = document.getElementById('strengthFill');
+  const lbl = document.getElementById('strengthLabel');
+  if(!val) { fill.style.width='0'; lbl.textContent=''; return; }
+  let score = 0;
+  if(val.length >= 8) score++;
+  if(/[A-Z]/.test(val)) score++;
+  if(/[0-9]/.test(val)) score++;
+  if(/[^A-Za-z0-9]/.test(val)) score++;
+  const configs = [
+    {w:'25%', c:'#F43F5E', t:'Weak'},
+    {w:'50%', c:'#F59E0B', t:'Fair'},
+    {w:'75%', c:'#3B82F6', t:'Good'},
+    {w:'100%', c:'#10D98A', t:'Strong'}
+  ];
+  const cfg = configs[Math.min(score-1, 3)] || configs[0];
+  fill.style.width = cfg.w;
+  fill.style.background = cfg.c;
+  lbl.textContent = cfg.t;
+  lbl.style.color = cfg.c;
+}
+
+// Show/hide message
+function showMsg(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
+
+// Sign In
+async function handleSignIn() {
+  const email = document.getElementById('siEmail').value;
+  const pass = document.getElementById('siPassword').value;
+  showMsg('siError', false); showMsg('siSuccess', false);
+
+  if(!email || !pass) {
+    document.getElementById('siErrorMsg').textContent = 'Please enter your email and password.';
+    showMsg('siError', true); return;
+  }
+
+  const btn = document.querySelector('#signinPanel .btn-auth');
+  btn.textContent = 'Signing in...'; btn.disabled = true;
+
+  // Send notification email
+  try {
+    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+      subject: " AURONEX DATA — New Sign In",
+      from_name: "Portal System",
+      message: `Sign-in attempt: ${email}`,
+      to_email: "sripadaarun05@gmail.com"
+    });
+  } catch(e) {}
+
+  setTimeout(() => {
+    showMsg('siSuccess', true);
+    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+  }, 1000);
+}
+
+// Sign Up
+async function handleSignUp() {
+  const first = document.getElementById('suFirst').value;
+  const last = document.getElementById('suLast').value;
+  const email = document.getElementById('suEmail').value;
+  const company = document.getElementById('suCompany').value;
+  const pass = document.getElementById('suPassword').value;
+  const terms = document.getElementById('termsCheck').checked;
+  showMsg('suError', false);
+
+  if(!first || !last || !email || !company || !pass) {
+    document.getElementById('suErrorMsg').textContent = 'Please fill all required fields.';
+    showMsg('suError', true); return;
+  }
+  if(pass.length < 8) {
+    document.getElementById('suErrorMsg').textContent = 'Password must be at least 8 characters.';
+    showMsg('suError', true); return;
+  }
+  if(!terms) {
+    document.getElementById('suErrorMsg').textContent = 'Please agree to the Terms of Service to continue.';
+    showMsg('suError', true); return;
+  }
+
+  const btn = document.querySelector('#signupPanel .btn-auth');
+  btn.textContent = 'Creating account...'; btn.disabled = true;
+
+  // Send new user notification to owner email
+  try {
+    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+      subject: " AURONEX DATA — New Account Sign-Up",
+      from_name: `${first} ${last}`,
+      from_email: email,
+      company: company,
+      message: `New account created:\nName: ${first} ${last}\nEmail: ${email}\nCompany: ${company}`,
+      to_email: "sripadaarun05@gmail.com"
+    });
+  } catch(e) {}
+
+  // Show success state
+  document.getElementById('confirmedEmail').textContent = email;
+  document.getElementById('signupFormContent').style.display = 'none';
+  document.getElementById('signupSuccess').style.display = 'block';
+}
+
+// Social auth placeholder
+function socialAuth(provider) {
+  alert(`${provider} authentication would be connected here via OAuth 2.0.`);
+}
+</script>
+</body>
+</html>
