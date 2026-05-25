@@ -501,8 +501,17 @@ main {
 
       <!-- SIGN IN PANEL -->
       <div class="form-panel active" id="signinPanel">
-        <div class="auth-title">Welcome to Auronex</div>
-        <div class="auth-sub">Sign in to your  AURONEX DATA account</div>
+        <div class="auth-title">Welcome back</div>
+        <div class="auth-sub">Sign in to your  AURONEX DATA client portal</div>
+
+        <div class="msg error" id="siError">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+          <span id="siErrorMsg">Invalid email or password. Please try again.</span>
+        </div>
+        <div class="msg success" id="siSuccess">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          Signed in successfully! Redirecting...
+        </div>
         
         <div class="form-group">
           <label class="form-label">Work Email</label>
@@ -547,6 +556,11 @@ main {
         <div id="signupFormContent">
           <div class="auth-title">Create Account</div>
           <div class="auth-sub">Start your data transformation journey today</div>
+
+          <div class="msg error" id="suError">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+            <span id="suErrorMsg">Please fill all required fields correctly.</span>
+          </div>
 
           <div class="form-row">
             <div class="form-group">
