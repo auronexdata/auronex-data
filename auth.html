@@ -505,11 +505,19 @@ main {
         <div class="auth-title">Welcome back</div>
         <div class="auth-sub">Sign in to your  AURONEX DATA client portal</div>
 
-        <div class="msg error" id="siError">
+        <div
+          id="siError"
+          class="auth-message error"
+          style="display:none;"
+        >
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
           <span id="siErrorMsg">Invalid email or password. Please try again.</span>
         </div>
-        <div class="msg success" id="siSuccess">
+        <div
+          id="siSuccess"
+          class="auth-message success"
+          style="display:none;"
+        >
           <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
           Signed in successfully! Redirecting...
         </div>
@@ -690,7 +698,22 @@ function checkStrength(val) {
 }
 
 // Show/hide message
-function showMsg(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
+function showMsg(id, show){
+
+  const el =
+    document.getElementById(id);
+
+  if(show){
+
+    el.style.display = "flex";
+
+  }else{
+
+    el.style.display = "none";
+
+  }
+
+}
 
 // Sign In
 async function handleSignIn() {
@@ -1039,38 +1062,36 @@ async function(){
 
   try{
 
-    await signInWithPopup(
-      auth,
-      provider
-    );
+   const result =
+  await signInWithPopup(
+    auth,
+    provider
+  );
 
-    localStorage.setItem(
-      "auronexLoggedIn",
-      "true"
-    );
+  const user = result.user;
 
-    showMsg(
-      "siSuccess",
-      true
-    );
+  localStorage.setItem(
+    "userPhoto",
+    user.photoURL
+  );
 
-    setTimeout(() => {
+  localStorage.setItem(
+    "userName",
+    user.displayName
+  );
 
-      window.location.href =
-        "index.html";
+  localStorage.setItem(
+    "userEmail",
+    user.email
+  );
 
-    }, 1200);
+} catch (error) {
 
-  }
-
-  catch(error){
-
-    alert(error.message);
-
-  }
+  console.error(error);
 
 }
 
+}
 });
 
 </script>
