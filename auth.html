@@ -844,32 +844,24 @@ async function handleSignUp() {
 </script>
 <script type="module">
 
-/* FIREBASE */
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 
   getAuth,
-
   createUserWithEmailAndPassword,
-
   signInWithEmailAndPassword,
-
   signOut,
-
   onAuthStateChanged,
-
   GoogleAuthProvider,
-
   signInWithPopup
 
 }
 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-/* CONFIG */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -906,6 +898,7 @@ const auth =
 
 const provider =
   new GoogleAuthProvider();
+
 /* SIGN UP */
 
 window.handleSignUp =
@@ -924,18 +917,24 @@ async function(){
   try{
 
     await createUserWithEmailAndPassword(
-
       auth,
       email,
       password
-
     );
+
+    localStorage.setItem(
+      "auronexLoggedIn",
+      "true"
+    );
+
+    showMsg("suError", false);
 
     alert(
       "Account created successfully!"
     );
 
-    switchTab("signin");
+    window.location.href =
+      "index.html";
 
   }
 
@@ -967,14 +966,15 @@ async function(){
       "siPassword"
     ).value.trim();
 
+  showMsg("siError", false);
+  showMsg("siSuccess", false);
+
   try{
 
     await signInWithEmailAndPassword(
-
       auth,
       email,
       password
-
     );
 
     localStorage.setItem(
@@ -1006,6 +1006,57 @@ async function(){
 
 };
 
+/* GOOGLE LOGIN */
+
+window.socialAuth =
+async function(){
+
+  try{
+
+    const result =
+      await signInWithPopup(
+        auth,
+        provider
+      );
+
+    const user =
+      result.user;
+
+    localStorage.setItem(
+      "auronexLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "userPhoto",
+      user.photoURL
+    );
+
+    localStorage.setItem(
+      "userName",
+      user.displayName
+    );
+
+    localStorage.setItem(
+      "userEmail",
+      user.email
+    );
+
+    window.location.href =
+      "index.html";
+
+  }
+
+  catch(error){
+
+    alert(error.message);
+
+    console.error(error);
+
+  }
+
+};
+
 /* LOGOUT */
 
 window.logoutUser =
@@ -1013,16 +1064,14 @@ async function(){
 
   await signOut(auth);
 
-  localStorage.removeItem(
-    "auronexLoggedIn"
-  );
+  localStorage.clear();
 
   window.location.href =
     "auth.html";
 
 };
 
-/* SESSION */
+/* SESSION CHECK */
 
 onAuthStateChanged(auth, (user) => {
 
@@ -1033,50 +1082,14 @@ onAuthStateChanged(auth, (user) => {
       "true"
     );
 
-  }else{
+  } else {
 
     localStorage.removeItem(
       "auronexLoggedIn"
     );
 
   }
-  /* GOOGLE LOGIN */
 
-window.socialAuth =
-async function(){
-
-  try{
-
-   const result =
-  await signInWithPopup(
-    auth,
-    provider
-  );
-
-  const user = result.user;
-
-  localStorage.setItem(
-    "userPhoto",
-    user.photoURL
-  );
-
-  localStorage.setItem(
-    "userName",
-    user.displayName
-  );
-
-  localStorage.setItem(
-    "userEmail",
-    user.email
-  );
-
-} catch (error) {
-
-  console.error(error);
-
-}
-
-}
 });
 
 </script>
