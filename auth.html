@@ -693,33 +693,100 @@ function showMsg(id, show) { document.getElementById(id).style.display = show ? 
 
 // Sign In
 async function handleSignIn() {
-  const email = document.getElementById('siEmail').value;
-  const pass = document.getElementById('siPassword').value;
-  showMsg('siError', false); showMsg('siSuccess', false);
 
-  if(!email || !pass) {
-    document.getElementById('siErrorMsg').textContent = 'Please enter your email and password.';
-    showMsg('siError', true); return;
+  const email =
+    document.getElementById('siEmail').value.trim();
+
+  const pass =
+    document.getElementById('siPassword').value.trim();
+
+  showMsg('siError', false);
+  showMsg('siSuccess', false);
+
+  /* EMPTY CHECK */
+
+  if(email === "" || pass === ""){
+
+    document.getElementById(
+      'siErrorMsg'
+    ).textContent =
+      'Please enter your email and password.';
+
+    showMsg('siError', true);
+
+    return;
   }
 
-  const btn = document.querySelector('#signinPanel .btn-auth');
-  btn.textContent = 'Signing in...'; btn.disabled = true;
+  /* VALID LOGIN */
 
-  // Send notification email
-  try {
-    await emailjs.send("service_4aar93d", "template_kmnyll5", {
-      subject: " AURONEX DATA — New Sign In",
-      from_name: "Portal System",
-      message: `Sign-in attempt: ${email}`,
-      to_email: "sripadaarun05@gmail.com"
-    });
-  } catch(e) {}
+  if(
+    email === "admin@auronex.com"
+    &&
+    pass === "admin123"
+  ){
 
-  setTimeout(() => {
+    const btn =
+      document.querySelector(
+        '#signinPanel .btn-auth'
+      );
+
+    btn.textContent = 'Signing in...';
+
+    btn.disabled = true;
+
+    try {
+
+      await emailjs.send(
+        "service_4aar93d",
+        "template_kmnyll5",
+        {
+          subject:
+            "AURONEX DATA — New Sign In",
+
+          from_name:
+            "Portal System",
+
+          message:
+            `Successful login: ${email}`,
+
+          to_email:
+            "sripadaarun05@gmail.com"
+        }
+      );
+
+    } catch(e){}
+
     showMsg('siSuccess', true);
-    localStorage.setItem("auronexLoggedIn", "true");
-    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
-  }, 1000);
+
+    localStorage.setItem(
+      "auronexLoggedIn",
+      "true"
+    );
+
+    setTimeout(() => {
+
+      window.location.href =
+        'index.html';
+
+    }, 1200);
+
+  }
+
+  /* INVALID LOGIN */
+
+  else{
+
+    document.getElementById(
+      'siErrorMsg'
+    ).textContent =
+      'Invalid email or password. Please try again.';
+
+    showMsg('siError', true);
+
+    return;
+
+  }
+
 }
 
 // Sign Up
@@ -769,74 +836,6 @@ async function handleSignUp() {
 // Social auth placeholder
 function socialAuth(provider) {
   alert(`${provider} authentication would be connected here via OAuth 2.0.`);
-}
-
-const authBtn = document.getElementById("authBtn");
-
-const isLoggedIn =
-  localStorage.getItem("auronexLoggedIn");
-
-if(isLoggedIn === "true"){
-
-  authBtn.innerHTML = "Dashboard";
-
-  authBtn.href = "dashboard.html";
-
-}
-
-function loginUser(event){
-
-  event.preventDefault();
-
-  const email =
-    document.getElementById("loginEmail").value;
-
-  const password =
-    document.getElementById("loginPassword").value;
-
-  /* VALIDATION */
-
-  if(email.trim() === "" || password.trim() === ""){
-
-    showError(
-      "Please enter email and password."
-    );
-
-    return;
-  }
-
-  /* DEMO LOGIN */
-
-  if(
-    email === "admin@auronex.com"
-    &&
-    password === "admin123"
-  ){
-
-    showSuccess(
-      "Signed in successfully! Redirecting..."
-    );
-
-    localStorage.setItem(
-      "auronexLoggedIn",
-      "true"
-    );
-
-    setTimeout(() => {
-
-      window.location.href =
-        "index.html";
-
-    }, 1200);
-
-  }else{
-
-    showError(
-      "Invalid email or password. Please try again."
-    );
-
-  }
-
 }
 </script>
 </body>
